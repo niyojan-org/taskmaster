@@ -39,7 +39,7 @@ function Page() {
         }
         console.log('Form Data:', formData)
         try {
-            const res = await api.post('/api/util/resources', formData)
+            const res = await api.post('/util/resources', formData)
             toast.success('Resource created successfully!')
             setFormData({
                 title: '',

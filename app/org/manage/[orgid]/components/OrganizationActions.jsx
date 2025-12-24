@@ -13,6 +13,7 @@ import VerifyOrganizationDialog from './Actions/VerifyOrganizationDialog';
 import FraudFlagDialog from './Actions/FraudFlagDialog';
 import WarningDialog from './Actions/WarningDialog';
 import PendingFraudFlags from './Actions/PendingFraudFlags';
+import AddPaymentGetway from './components/AddPaymentGetway';
 
 export default function OrganizationActions({ orgId, orgData, onUpdate }) {
   const [loading, setLoading] = useState(false);
@@ -196,6 +197,16 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
           <DocumentManagement documents={orgData.documents} loading={loading} makeApiCall={makeApiCall} />
         </ActionCard>
       )}
+
+      {/* Payment Gateway Management */}
+      <ActionCard
+        title="Payment Gateway"
+        description="Add payment gateway account details"
+        icon={Settings}
+        color="green"
+      >
+        <AddPaymentGetway orgId={orgId} orgData={orgData} onUpdate={onUpdate} />
+      </ActionCard>
 
       {/* Block Organization Dialog */}
       <BlockOrganizationDialog
