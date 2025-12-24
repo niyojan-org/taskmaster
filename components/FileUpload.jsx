@@ -41,7 +41,7 @@ const FileUpload = ({ onFileUpload, folder }) => {
 
     try {
       setIsUploading(true);
-      const res = await api.post("/api/util/upload", formData);
+      const res = await api.post("/util/upload", formData);
       const data = res.data;
 
       if (res.status === 200) {
