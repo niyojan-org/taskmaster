@@ -21,7 +21,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await api.post("/api/auth/login", credentials);
+      const response = await api.post("/auth/login", credentials);
       localStorage.setItem("token", response.data.data.token);
       toast.success(response.data.message || "Login successful!");
       

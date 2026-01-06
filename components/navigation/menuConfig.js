@@ -59,7 +59,7 @@ export const getMenuItems = (isAuthenticated) => [
         {
           title: "Manage Resource",
           subtext: "Manage existing resources",
-          link: "/resource/manage",
+          link: "/resource",
           icon: "FileText",
         },
       ],
