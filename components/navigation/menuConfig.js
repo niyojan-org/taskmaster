@@ -1,4 +1,3 @@
-import { title } from "process";
 
 // Menu configuration for navigation
 export const getMenuItems = (isAuthenticated) => [
@@ -10,6 +9,12 @@ export const getMenuItems = (isAuthenticated) => [
     {
       title: "Organizations",
       submenu: [
+        {
+          title: "Organization Dashboard",
+          link: "/org",
+          subtext: "Overview of organization activities",
+          icon: "Dashboard",
+        },
         {
           title: "Organization List",
           subtext: "View and manage all organizations",

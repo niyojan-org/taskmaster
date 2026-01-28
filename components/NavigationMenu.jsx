@@ -12,12 +12,12 @@ import UserDropdown from "./navigation/UserDropdown";
 import MobileMenu from "./navigation/MobileMenu";
 import DesktopMenu from "./navigation/DesktopMenu";
 import { getMenuItems } from "./navigation/menuConfig";
-import { useAuth } from "@/hooks/useAuth";
+import useAuthStore from "@/store/authStore";
 
 function NavigationBar() {
   const router = useRouter();
-  const { isAuthenticated, user, authLoading, setUserData, logout } = useAuth();
-  
+  const { isAuthenticated, user, authLoading, setUserData, logout } = useAuthStore();
+
   // UI state
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -68,13 +68,13 @@ function NavigationBar() {
 
   return (
     <nav className="bg-white shadow p-4 flex items-center justify-between lg:px-32 fixed w-full z-50">
-      <div 
-        className="text-lg font-bold cursor-pointer" 
+      <div
+        className="text-lg font-bold cursor-pointer"
         onClick={() => handleNavigation('/')}
       >
         Orgatick
       </div>
-      
+
       {/* Hamburger Menu for Mobile */}
       <button
         className="lg:hidden text-gray-700 focus:outline-none"

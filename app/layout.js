@@ -1,7 +1,7 @@
 import { Source_Code_Pro, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import NavigationBar from "@/components/NavigationMenu";
+import ClientLayout from "./client-layout";
 
 const sourceCodePro = Source_Code_Pro({
   variable: "--font-source-code-pro",
@@ -27,10 +27,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${sourceSans3.variable} ${sourceCodePro.variable} font-source-sans-3 antialiased`}
       >
-        <NavigationBar />
-        <div className="pt-12">{children}</div>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
         <Toaster />
       </body>
-    </html>
+    </html >
   );
 }
