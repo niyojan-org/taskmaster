@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Lock, X, Eye, EyeOff } from "lucide-react";
 import api from "@/lib/api";
 import { toast } from "sonner";
+import { IconEye, IconEyeOff, IconLock, IconMail, IconX } from "@tabler/icons-react";
 
 export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -24,13 +24,13 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
       const response = await api.post("/auth/login", credentials);
       localStorage.setItem("token", response.data.data.token);
       toast.success(response.data.message || "Login successful!");
-      
+
       // Fetch user data after successful login
       const userResponse = await api.get('/user/me');
       if (userResponse.data.status === 'success') {
         onLoginSuccess(userResponse.data.data.user);
       }
-      
+
       setCredentials({ email: "", password: "" });
       onClose();
     } catch (err) {
@@ -56,7 +56,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-          
+
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
                 onClick={handleClose}
                 className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-10"
               >
-                <X size={20} />
+                <IconX size={20} />
               </button>
 
               <CardHeader className="text-center pb-6 pt-8">
@@ -87,7 +87,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
                 {/* Email Input */}
                 <div className="space-y-2">
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                    <IconMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                     <Input
                       name="email"
                       type="email"
@@ -103,7 +103,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
                 {/* Password Input */}
                 <div className="space-y-2">
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                    <IconLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                     <Input
                       name="password"
                       type={showPassword ? "text" : "password"}
@@ -118,15 +118,15 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                     >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      {showPassword ? <IconEyeOff size={18} /> : <IconEye size={18} />}
                     </button>
                   </div>
                 </div>
 
                 {/* Login Button */}
-                <Button 
-                  onClick={handleSubmit} 
-                  disabled={loading || !credentials.email || !credentials.password} 
+                <Button
+                  onClick={handleSubmit}
+                  disabled={loading || !credentials.email || !credentials.password}
                   className="w-full h-12 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
                 >
                   {loading ? (
@@ -150,9 +150,9 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
                 </div>
 
                 {/* Cancel Button */}
-                <Button 
-                  onClick={handleClose} 
-                  variant="outline" 
+                <Button
+                  onClick={handleClose}
+                  variant="outline"
                   className="w-full h-12 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-xl font-medium transition-colors cursor-pointer"
                 >
                   Cancel

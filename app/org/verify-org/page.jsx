@@ -6,21 +6,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { 
-  Building2, 
-  Clock, 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Globe, 
-  FileText,
-  RefreshCw,
-  ArrowRight,
-  CheckCircle,
-  XCircle,
-  AlertCircle
-} from "lucide-react";
+import {
+  IconBuilding,
+  IconClock,
+  IconUser,
+  IconMail,
+  IconPhone,
+  IconMapPin,
+  IconWorld,
+  IconFileText,
+  IconRefresh,
+  IconArrowRight,
+  IconCircleCheck,
+  IconCircleX,
+  IconAlertCircle
+} from "@tabler/icons-react";
 import api from "@/lib/api";
 
 export default function VerificationRequestsPage() {
@@ -83,11 +83,11 @@ export default function VerificationRequestsPage() {
     return (
       <div className="p-6">
         <div className="text-center py-12">
-          <XCircle className="mx-auto h-12 w-12 text-red-500 mb-4" />
+          <IconCircleX className="mx-auto h-12 w-12 text-red-500 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Verification Requests</h3>
           <p className="text-gray-500 mb-4">{error}</p>
           <Button onClick={fetchPendingVerifications} className="bg-blue-600 hover:bg-blue-700">
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <IconRefresh className="w-4 h-4 mr-2" />
             Try Again
           </Button>
         </div>
@@ -106,7 +106,7 @@ export default function VerificationRequestsPage() {
           </p>
         </div>
         <Button onClick={fetchPendingVerifications} variant="outline" className="flex items-center gap-2">
-          <RefreshCw className="w-4 h-4" />
+          <IconRefresh className="w-4 h-4" />
           Refresh
         </Button>
       </div>
@@ -114,7 +114,7 @@ export default function VerificationRequestsPage() {
       {/* No Pending Verifications */}
       {organizations.length === 0 ? (
         <div className="text-center py-12">
-          <CheckCircle className="mx-auto h-12 w-12 text-green-500 mb-4" />
+          <IconCircleCheck className="mx-auto h-12 w-12 text-green-500 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No Pending Verifications</h3>
           <p className="text-gray-500">All organizations have been verified or processed.</p>
         </div>
@@ -128,14 +128,14 @@ export default function VerificationRequestsPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       {org.logo ? (
-                        <img 
-                          src={org.logo} 
+                        <img
+                          src={org.logo}
                           alt={`${org.name} logo`}
                           className="w-12 h-12 rounded-lg object-cover border"
                         />
                       ) : (
                         <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                          <Building2 className="w-6 h-6 text-gray-500" />
+                          <IconBuilding className="w-6 h-6 text-gray-500" />
                         </div>
                       )}
                       <div>
@@ -147,31 +147,31 @@ export default function VerificationRequestsPage() {
                             {org.category}
                           </Badge>
                           <Badge variant="outline" className="text-xs bg-yellow-50 text-yellow-700 border-yellow-200">
-                            <Clock className="w-3 h-3 mr-1" />
+                            <IconClock className="w-3 h-3 mr-1" />
                             Pending
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    <IconArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
                   </div>
                 </CardHeader>
-                
+
                 <CardContent className="space-y-3">
                   {/* Admin Info */}
                   <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <User className="w-4 h-4" />
+                    <IconUser className="w-4 h-4" />
                     <span>{org.admin.name}</span>
                   </div>
-                  
+
                   {/* Contact Info */}
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Mail className="w-4 h-4" />
+                      <IconMail className="w-4 h-4" />
                       <span className="truncate">{org.email}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Phone className="w-4 h-4" />
+                      <IconPhone className="w-4 h-4" />
                       <span>{org.phone}</span>
                     </div>
                   </div>
@@ -179,7 +179,7 @@ export default function VerificationRequestsPage() {
                   {/* Address */}
                   {org.address && (
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <MapPin className="w-4 h-4" />
+                      <IconMapPin className="w-4 h-4" />
                       <span className="truncate">
                         {org.address.city}, {org.address.state}
                       </span>
@@ -189,7 +189,7 @@ export default function VerificationRequestsPage() {
                   {/* Website */}
                   {org.website && (
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Globe className="w-4 h-4" />
+                      <IconWorld className="w-4 h-4" />
                       <span className="truncate">{org.website}</span>
                     </div>
                   )}
@@ -197,18 +197,18 @@ export default function VerificationRequestsPage() {
                   {/* Documents Status */}
                   <div className="flex items-center justify-between pt-2 border-t">
                     <div className="flex items-center gap-2 text-sm">
-                      <FileText className="w-4 h-4" />
+                      <IconFileText className="w-4 h-4" />
                       <span>{org.documents?.length || 0} document{org.documents?.length !== 1 ? 's' : ''}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       {org.stepsCompleted?.documents ? (
                         <Badge className="bg-green-100 text-green-800 text-xs">
-                          <CheckCircle className="w-3 h-3 mr-1" />
+                          <IconCircleCheck className="w-3 h-3 mr-1" />
                           Complete
                         </Badge>
                       ) : (
                         <Badge variant="destructive" className="text-xs">
-                          <AlertCircle className="w-3 h-3 mr-1" />
+                          <IconAlertCircle className="w-3 h-3 mr-1" />
                           Incomplete
                         </Badge>
                       )}

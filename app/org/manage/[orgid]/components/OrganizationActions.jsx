@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import api from '@/lib/api';
 import { Button } from '@/components/ui/button';
-import { Shield, Ban, CheckCircle, AlertTriangle, Calendar, Flag, Settings, Loader2, FileText } from 'lucide-react';
+import { IconShield, IconBan, IconCircleCheck, IconAlertTriangle, IconCalendar, IconFlag, IconSettings, IconLoader2, IconFileText } from '@tabler/icons-react';
 import { toast } from 'sonner';
 import ActionCard from './Actions/ActionCard';
 import DocumentManagement from './Actions/DocumentManagement';
@@ -62,7 +62,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
       <ActionCard
         title="Organization Status"
         description="Manage organization verification and blocking"
-        icon={Shield}
+        icon={IconShield}
         color="blue"
       >
         <div className="space-y-3">
@@ -74,7 +74,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
               className="w-full cursor-pointer"
               disabled={loading}
             >
-              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Ban className="w-4 h-4 mr-2" />}
+              {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconBan className="w-4 h-4 mr-2" />}
               Block Organization
             </Button>
           ) : (
@@ -84,7 +84,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
               className="w-full bg-green-600 hover:bg-green-700 cursor-pointer"
               disabled={loading}
             >
-              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
+              {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconCircleCheck className="w-4 h-4 mr-2" />}
               Unblock Organization
             </Button>
           )}
@@ -97,7 +97,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
               className="w-full bg-green-600 hover:bg-green-700 cursor-pointer"
               disabled={loading}
             >
-              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
+              {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconCircleCheck className="w-4 h-4 mr-2" />}
               Verify Organization
             </Button>
           ) : (
@@ -107,7 +107,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
               className="w-full cursor-pointer"
               disabled={loading}
             >
-              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Ban className="w-4 h-4 mr-2" />}
+              {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconBan className="w-4 h-4 mr-2" />}
               Remove Verification
             </Button>
           )}
@@ -118,7 +118,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
       <ActionCard
         title="Event Management"
         description="Control event creation permissions"
-        icon={Calendar}
+        icon={IconCalendar}
         color="orange"
       >
         {orgData.canCreateEvents ? (
@@ -128,7 +128,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
             className="w-full cursor-pointer"
             disabled={loading}
           >
-            {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Ban className="w-4 h-4 mr-2" />}
+            {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconBan className="w-4 h-4 mr-2" />}
             Block Event Creation
           </Button>
         ) : (
@@ -138,7 +138,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
             className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer"
             disabled={loading}
           >
-            {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <CheckCircle className="w-4 h-4 mr-2" />}
+            {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconCircleCheck className="w-4 h-4 mr-2" />}
             Allow Event Creation
           </Button>
         )}
@@ -148,7 +148,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
       <ActionCard
         title="Security & Compliance"
         description="Add warnings and fraud flags"
-        icon={AlertTriangle}
+        icon={IconAlertTriangle}
         color="red"
       >
         <div className="space-y-3">
@@ -158,7 +158,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
             className="w-full cursor-pointer"
             disabled={loading}
           >
-            <Flag className="w-4 h-4 mr-2" />
+            <IconFlag className="w-4 h-4 mr-2" />
             Add Fraud Flag
           </Button>
 
@@ -168,7 +168,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
             className="w-full border-yellow-300 text-yellow-700 hover:bg-yellow-50 cursor-pointer"
             disabled={loading}
           >
-            <AlertTriangle className="w-4 h-4 mr-2" />
+            <IconAlertTriangle className="w-4 h-4 mr-2" />
             Add Warning
           </Button>
         </div>
@@ -179,7 +179,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
         <ActionCard
           title="Pending Fraud Flags"
           description="Resolve active fraud flags"
-          icon={Flag}
+          icon={IconFlag}
           color="purple"
         >
           <PendingFraudFlags fraudFlags={orgData.fraudFlags} loading={loading} makeApiCall={makeApiCall} />
@@ -191,7 +191,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
         <ActionCard
           title="Document Management"
           description="Verify organization documents"
-          icon={FileText}
+          icon={IconFileText}
           color="blue"
         >
           <DocumentManagement documents={orgData.documents} loading={loading} makeApiCall={makeApiCall} />
@@ -202,7 +202,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
       <ActionCard
         title="Payment Gateway"
         description="Add payment gateway account details"
-        icon={Settings}
+        icon={IconSettings}
         color="green"
       >
         <AddPaymentGetway orgId={orgId} orgData={orgData} onUpdate={onUpdate} />

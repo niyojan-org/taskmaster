@@ -11,24 +11,24 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
-  Building2, 
-  Search, 
-  Filter, 
-  RefreshCw, 
-  ChevronLeft, 
-  ChevronRight,
-  Eye,
-  MapPin,
-  Mail,
-  Phone,
-  Globe,
-  Calendar,
-  TrendingUp,
-  AlertTriangle,
-  CheckCircle,
-  XCircle,
-  Users
-} from 'lucide-react';
+  IconBuilding, 
+  IconSearch, 
+  IconFilter, 
+  IconRefresh, 
+  IconChevronLeft, 
+  IconChevronRight,
+  IconEye,
+  IconMapPin,
+  IconMail,
+  IconPhone,
+  IconWorld,
+  IconCalendar,
+  IconTrendingUp,
+  IconAlertTriangle,
+  IconCircleCheck,
+  IconCircleX,
+  IconUsers
+} from '@tabler/icons-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
@@ -172,19 +172,19 @@ export default function OrganizationManagePage() {
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
             <div className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-gray-500" />
+              <IconMail className="h-4 w-4 text-gray-500" />
               <span className="truncate">{org.email}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-gray-500" />
+              <IconPhone className="h-4 w-4 text-gray-500" />
               <span>{org.phone}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-gray-500" />
+              <IconBuilding className="h-4 w-4 text-gray-500" />
               <span className="truncate">{org.category} - {org.subCategory}</span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gray-500" />
+              <IconMapPin className="h-4 w-4 text-gray-500" />
               <span className="truncate">{org.address?.city}, {org.address?.state}</span>
             </div>
           </div>
@@ -233,7 +233,7 @@ export default function OrganizationManagePage() {
             </div>
             <Link href={`/org/manage/${org._id}`}>
               <Button size="sm" className="cursor-pointer">
-                <Eye className="w-4 h-4 mr-1" />
+                <IconEye className="w-4 h-4 mr-1" />
                 Manage
               </Button>
             </Link>
@@ -279,11 +279,11 @@ export default function OrganizationManagePage() {
       <div className="p-6 bg-gray-50 min-h-screen">
         <div className="max-w-2xl mx-auto">
           <div className="text-center py-12">
-            <XCircle className="mx-auto h-12 w-12 text-red-500 mb-4" />
+            <IconCircleX className="mx-auto h-12 w-12 text-red-500 mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Organizations</h3>
             <p className="text-gray-500 mb-4">{error}</p>
             <Button onClick={fetchOrganizations} className="bg-blue-600 hover:bg-blue-700 cursor-pointer">
-              <RefreshCw className="w-4 h-4 mr-2" />
+              <IconRefresh className="w-4 h-4 mr-2" />
               Try Again
             </Button>
           </div>
@@ -303,7 +303,7 @@ export default function OrganizationManagePage() {
           </p>
         </div>
         <Button onClick={fetchOrganizations} variant="outline" className="flex items-center gap-2 cursor-pointer">
-          <RefreshCw className="w-4 h-4" />
+          <IconRefresh className="w-4 h-4" />
           Refresh
         </Button>
       </div>
@@ -312,7 +312,7 @@ export default function OrganizationManagePage() {
       <Card className="w-full">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-xl">
-            <Filter className="h-6 w-6" />
+            <IconFilter className="h-6 w-6" />
             Filters & Search
           </CardTitle>
         </CardHeader>
@@ -331,7 +331,7 @@ export default function OrganizationManagePage() {
                   className="flex-1"
                 />
                 <Button onClick={handleSearch} size="default" className="cursor-pointer px-4">
-                  <Search className="w-4 h-4" />
+                  <IconSearch className="w-4 h-4" />
                 </Button>
               </div>
             </div>
@@ -465,7 +465,7 @@ export default function OrganizationManagePage() {
               size="sm"
               className="cursor-pointer"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <IconChevronLeft className="w-4 h-4" />
               Previous
             </Button>
             
@@ -496,7 +496,7 @@ export default function OrganizationManagePage() {
               className="cursor-pointer"
             >
               Next
-              <ChevronRight className="w-4 h-4" />
+              <IconChevronRight className="w-4 h-4" />
             </Button>
           </div>
         </div>
@@ -505,7 +505,7 @@ export default function OrganizationManagePage() {
       {/* Empty State */}
       {organizations.length === 0 && !loading && (
         <div className="text-center py-12">
-          <Building2 className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+          <IconBuilding className="mx-auto h-12 w-12 text-gray-400 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No Organizations Found</h3>
           <p className="text-gray-500 mb-4">
             {filters.search || filters.category || filters.verified || filters.isBlocked || filters.riskLevel

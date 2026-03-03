@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
-import { CreditCard, Loader2, Edit, CheckCircle, XCircle } from 'lucide-react';
+import { IconCreditCard, IconLoader2, IconEdit, IconCircleCheck, IconCircleX } from '@tabler/icons-react';
 import { toast } from 'sonner';
 import api from '@/lib/api';
 
@@ -85,9 +85,9 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <CreditCard className="w-4 h-4 text-blue-600" />
+                    <IconCreditCard className="w-4 h-4 text-blue-600" />
                     <p className="text-sm font-semibold text-blue-900">Razorpay</p>
-                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <IconCircleCheck className="w-4 h-4 text-green-600" />
                   </div>
                   <p className="text-xs text-gray-600 font-mono bg-white/60 px-2 py-1 rounded inline-block">
                     {razorpayExists}
@@ -102,9 +102,9 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <CreditCard className="w-4 h-4 text-purple-600" />
+                    <IconCreditCard className="w-4 h-4 text-purple-600" />
                     <p className="text-sm font-semibold text-purple-900">Cashfree</p>
-                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <IconCircleCheck className="w-4 h-4 text-green-600" />
                   </div>
                   <p className="text-xs text-gray-600 font-mono bg-white/60 px-2 py-1 rounded inline-block">
                     {cashfreeExists}
@@ -124,12 +124,12 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
       >
         {hasAnyGateway ? (
           <>
-            <Edit className="w-4 h-4 mr-2" />
+            <IconEdit className="w-4 h-4 mr-2" />
             Edit Payment Gateways
           </>
         ) : (
           <>
-            <CreditCard className="w-4 h-4 mr-2" />
+            <IconCreditCard className="w-4 h-4 mr-2" />
             Add Payment Gateways
           </>
         )}
@@ -142,12 +142,12 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
             <DialogTitle className="flex items-center gap-2">
               {hasAnyGateway ? (
                 <>
-                  <Edit className="w-5 h-5 text-orange-600" />
+                  <IconEdit className="w-5 h-5 text-orange-600" />
                   Edit Payment Gateways
                 </>
               ) : (
                 <>
-                  <CreditCard className="w-5 h-5 text-blue-600" />
+                  <IconCreditCard className="w-5 h-5 text-blue-600" />
                   Add Payment Gateways
                 </>
               )}
@@ -176,12 +176,12 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
                     className="font-mono text-sm"
                   />
                   {formData.razorpayAccountId && (
-                    <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-600" />
+                    <IconCircleCheck className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-600" />
                   )}
                 </div>
                 {razorpayExists && !formData.razorpayAccountId && (
                   <p className="text-xs text-amber-600 flex items-center gap-1">
-                    <XCircle className="w-3 h-3" />
+                    <IconCircleX className="w-3 h-3" />
                     Clear field to remove this gateway
                   </p>
                 )}
@@ -203,12 +203,12 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
                     className="font-mono text-sm"
                   />
                   {formData.cashfreeAccountId && (
-                    <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-600" />
+                    <IconCircleCheck className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-600" />
                   )}
                 </div>
                 {cashfreeExists && !formData.cashfreeAccountId && (
                   <p className="text-xs text-amber-600 flex items-center gap-1">
-                    <XCircle className="w-3 h-3" />
+                    <IconCircleX className="w-3 h-3" />
                     Clear field to remove this gateway
                   </p>
                 )}
@@ -231,7 +231,7 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <IconLoader2 className="w-4 h-4 mr-2 animate-spin" />
                     {hasAnyGateway ? 'Updating...' : 'Adding...'}
                   </>
                 ) : (

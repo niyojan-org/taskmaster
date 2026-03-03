@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
+import { IconCircleCheck } from '@tabler/icons-react';
 
 export default function DocumentManagement({ documents, loading, makeApiCall }) {
   if (!documents || documents.length === 0) return null;
@@ -31,7 +31,7 @@ export default function DocumentManagement({ documents, loading, makeApiCall }) 
               disabled={loading}
               className="cursor-pointer bg-green-600 hover:bg-green-700 text-white"
             >
-              <CheckCircle className="w-3 h-3 mr-1" />
+              <IconCircleCheck className="w-3 h-3 mr-1" />
               Verify
             </Button>
           )}

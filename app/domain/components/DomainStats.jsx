@@ -2,35 +2,29 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-    Globe,
-    CheckCircle2,
-    XCircle,
-    Server,
-    Shield,
-    Key
-} from 'lucide-react';
+
+import { IconCircleCheck, IconGlobe, IconServer2, IconShield, IconUxCircle, IconX } from '@tabler/icons-react';
 
 export default function DomainStats({ stats }) {
     const statCards = [
         {
             title: 'Total Domains',
             value: stats.total,
-            icon: Globe,
+            icon: IconGlobe,
             color: 'text-blue-600',
             bgColor: 'bg-blue-100',
         },
         {
             title: 'Active Domains',
             value: stats.active,
-            icon: CheckCircle2,
+            icon: IconCircleCheck,
             color: 'text-green-600',
             bgColor: 'bg-green-100',
         },
         {
             title: 'Inactive Domains',
             value: stats.inactive,
-            icon: XCircle,
+            icon: IconUxCircle,
             color: 'text-red-600',
             bgColor: 'bg-red-100',
         },
@@ -61,7 +55,7 @@ export default function DomainStats({ stats }) {
                 <Card>
                     <CardHeader>
                         <CardTitle className="text-base flex items-center gap-2">
-                            <Server className="h-4 w-4" />
+                            <IconServer2 className="h-4 w-4" />
                             By Environment
                         </CardTitle>
                     </CardHeader>
@@ -85,7 +79,7 @@ export default function DomainStats({ stats }) {
                 <Card>
                     <CardHeader>
                         <CardTitle className="text-base flex items-center gap-2">
-                            <Shield className="h-4 w-4" />
+                            <IconShield className="h-4 w-4" />
                             By Purpose
                         </CardTitle>
                     </CardHeader>

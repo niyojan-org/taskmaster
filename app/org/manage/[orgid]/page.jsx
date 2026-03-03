@@ -6,7 +6,7 @@ import api from '@/lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { RefreshCw, Building2, XCircle } from 'lucide-react';
+import { IconRefresh, IconBuilding, IconCircleX } from '@tabler/icons-react';
 import { toast } from 'sonner';
 import OrganizationDetails from './components/OrganizationDetails';
 import OrganizationActions from './components/OrganizationActions';
@@ -99,11 +99,11 @@ export default function ManageOrganizationPage() {
       <div className="p-6 bg-gray-50 min-h-screen">
         <div className="max-w-2xl mx-auto">
           <div className="text-center py-12">
-            <XCircle className="mx-auto h-12 w-12 text-red-500 mb-4" />
+            <IconCircleX className="mx-auto h-12 w-12 text-red-500 mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Organization</h3>
             <p className="text-gray-500 mb-4">{error}</p>
             <Button onClick={fetchOrganizationData} className="bg-blue-600 hover:bg-blue-700">
-              <RefreshCw className="w-4 h-4 mr-2" />
+              <IconRefresh className="w-4 h-4 mr-2" />
               Try Again
             </Button>
           </div>
@@ -117,11 +117,11 @@ export default function ManageOrganizationPage() {
       <div className="p-6 bg-gray-50 min-h-screen">
         <div className="max-w-2xl mx-auto">
           <div className="text-center py-12">
-            <Building2 className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+            <IconBuilding className="mx-auto h-12 w-12 text-gray-400 mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">Organization Not Found</h3>
             <p className="text-gray-500 mb-4">No organization data found for this ID</p>
             <Button onClick={fetchOrganizationData} variant="outline">
-              <RefreshCw className="w-4 h-4 mr-2" />
+              <IconRefresh className="w-4 h-4 mr-2" />
               Refresh
             </Button>
           </div>
@@ -156,7 +156,7 @@ export default function ManageOrganizationPage() {
           </div>
         </div>
         <Button onClick={fetchOrganizationData} variant="outline" className="flex items-center gap-2 cursor-pointer">
-          <RefreshCw className="w-4 h-4" />
+          <IconRefresh className="w-4 h-4" />
           Refresh
         </Button>
       </div>

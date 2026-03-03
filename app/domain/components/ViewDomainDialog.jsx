@@ -10,12 +10,12 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { 
-  Globe, 
-  Calendar, 
-  Shield, 
-  Activity,
-  FileText
-} from 'lucide-react';
+  IconWorld, 
+  IconCalendar, 
+  IconShield, 
+  IconActivity,
+  IconFileText
+} from '@tabler/icons-react';
 
 export default function ViewDomainDialog({ open, onOpenChange, domain }) {
   if (!domain) return null;
@@ -34,7 +34,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Globe className="h-5 w-5" />
+            <IconWorld className="h-5 w-5" />
             Domain Details
           </DialogTitle>
           <DialogDescription>
@@ -64,7 +64,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
-                <Activity className="h-4 w-4" />
+                <IconActivity className="h-4 w-4" />
                 Environment
               </h3>
               <Badge 
@@ -76,7 +76,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
             </div>
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
-                <Shield className="h-4 w-4" />
+                <IconShield className="h-4 w-4" />
                 Status
               </h3>
               <Badge 
@@ -93,7 +93,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
           {/* Purposes */}
           <div>
             <h3 className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
-              <Shield className="h-4 w-4" />
+              <IconShield className="h-4 w-4" />
               Purposes
             </h3>
             {purposes.length > 0 ? (
@@ -116,7 +116,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
             <>
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
+                  <IconFileText className="h-4 w-4" />
                   Notes
                 </h3>
                 <p className="text-sm bg-muted p-3 rounded-lg">
@@ -131,7 +131,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+                <IconCalendar className="h-4 w-4" />
                 Created At
               </h3>
               <p className="text-sm">
@@ -142,7 +142,7 @@ export default function ViewDomainDialog({ open, onOpenChange, domain }) {
             </div>
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+                <IconCalendar className="h-4 w-4" />
                 Updated At
               </h3>
               <p className="text-sm">

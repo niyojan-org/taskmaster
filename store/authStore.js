@@ -9,7 +9,8 @@ const useAuthStore = create((set) => ({
     // Check authentication status and fetch user data
     checkAuth: async () => {
         try {
-            const response = await api.get('/user/me');
+            const response = await api.get('/users/me');
+            console.log(response.data)
             set({
                 isAuthenticated: true,
                 user: response.data.data,

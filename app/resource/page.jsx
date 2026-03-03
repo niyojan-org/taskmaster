@@ -8,7 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus, FileText } from "lucide-react";
+import { IconPlus, IconFileText } from "@tabler/icons-react";
 
 // Import components
 import ResourceStats from "./components/ResourceStats";
@@ -257,7 +257,7 @@ export default function ResourceDashboard() {
                     <Card className="border-2 shadow-lg">
                         <CardContent className="flex flex-col items-center justify-center py-16">
                             <div className="bg-muted rounded-full p-6 mb-4">
-                                <FileText className="h-16 w-16 text-muted-foreground" />
+                                <IconFileText className="h-16 w-16 text-muted-foreground" />
                             </div>
                             <p className="text-2xl font-semibold mb-2">No resources found</p>
                             <p className="text-muted-foreground mb-6 text-center max-w-md">
@@ -270,7 +270,7 @@ export default function ResourceDashboard() {
                                     onClick={() => router.push("/resource/create")}
                                     size="lg"
                                 >
-                                    <Plus className="mr-2 h-5 w-5" />
+                                    <IconPlus className="mr-2 h-5 w-5" />
                                     Create Your First Resource
                                 </Button>
                             )}

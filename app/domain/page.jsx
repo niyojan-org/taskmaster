@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, RefreshCw } from 'lucide-react';
 import useDomainStore from '@/store/domainStore';
 import DomainStats from './components/DomainStats';
 import DomainTable from './components/DomainTable';
@@ -13,6 +12,7 @@ import EditDomainDialog from './components/EditDomainDialog';
 import DeleteDomainDialog from './components/DeleteDomainDialog';
 import ViewDomainDialog from './components/ViewDomainDialog';
 import { toast } from 'sonner';
+import { IconPlus, IconRefresh, IconSearch } from '@tabler/icons-react';
 
 export default function DomainManagementPage() {
     const {
@@ -94,11 +94,11 @@ export default function DomainManagementPage() {
                         size="default"
                         className="flex-1"
                     >
-                        <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                        <IconRefresh className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
                         Refresh
                     </Button>
                     <Button onClick={() => setCreateDialogOpen(true)} size="default" className="flex-1">
-                        <Plus className="h-4 w-4 mr-2" />
+                        <IconPlus className="h-4 w-4 mr-2" />
                         Add Domain
                     </Button>
                 </div>
@@ -118,7 +118,7 @@ export default function DomainManagementPage() {
                 <div className="lg:col-span-3 space-y-4">
                     {/* Search Bar */}
                     <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <IconSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
                             placeholder="Search domains..."
                             value={searchQuery}
@@ -137,7 +137,7 @@ export default function DomainManagementPage() {
                     {/* Domains Table */}
                     {loading && domains.length === 0 ? (
                         <div className="flex items-center justify-center py-12">
-                            <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" />
+                            <IconRefresh className="h-8 w-8 animate-spin text-muted-foreground" />
                         </div>
                     ) : (
                         <DomainTable

@@ -1,8 +1,8 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Lock } from "lucide-react";
 import useAuthStore from "@/store/authStore";
+import { IconLock } from "@tabler/icons-react";
 
 export default function LockPage() {
     const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -36,7 +36,7 @@ export default function LockPage() {
                 <Card className="border-2">
                     <CardHeader className="text-center space-y-4">
                         <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-                            <Lock className="w-8 h-8 text-muted-foreground" />
+                            <IconLock className="w-8 h-8 text-muted-foreground" />
                         </div>
                         <div>
                             <CardTitle className="text-2xl">Access Restricted</CardTitle>

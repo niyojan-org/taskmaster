@@ -10,9 +10,9 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import useDomainStore from '@/store/domainStore';
+import { IconAlertTriangle } from '@tabler/icons-react';
 
 export default function DeleteDomainDialog({ open, onOpenChange, domain }) {
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function DeleteDomainDialog({ open, onOpenChange, domain }) {
         <DialogHeader>
           <div className="flex items-center gap-2">
             <div className="bg-red-100 p-2 rounded-lg">
-              <AlertTriangle className="h-5 w-5 text-red-600" />
+              <IconAlertTriangle className="h-5 w-5 text-red-600" />
             </div>
             <DialogTitle>Delete Domain</DialogTitle>
           </div>

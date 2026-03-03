@@ -1,6 +1,4 @@
 "use client";
-
-import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -13,6 +11,7 @@ import MobileMenu from "./navigation/MobileMenu";
 import DesktopMenu from "./navigation/DesktopMenu";
 import { getMenuItems } from "./navigation/menuConfig";
 import useAuthStore from "@/store/authStore";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 
 function NavigationBar() {
   const router = useRouter();
@@ -80,7 +79,7 @@ function NavigationBar() {
         className="lg:hidden text-gray-700 focus:outline-none"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
-        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        {isMobileMenuOpen ? <IconX size={24} /> : <IconMenu2 size={24} />}
       </button>
 
       {/* Desktop Menu */}

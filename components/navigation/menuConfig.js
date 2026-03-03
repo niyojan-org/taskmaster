@@ -69,6 +69,17 @@ export const getMenuItems = (isAuthenticated) => [
         },
       ],
     },
+    {
+      title: "Domains",
+      submenu: [
+        {
+          title: "Manage Domains",
+          subtext: "View and manage all domains",
+          link: "/domain",
+          icon: "World",
+        },
+      ],
+    },
   ] : []),
   {
     title: "Documentation",

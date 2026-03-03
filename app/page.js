@@ -1,28 +1,21 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
-import {
-  Users,
-  Building2,
-  Calendar,
-  FileText,
-  AlertTriangle,
-  Settings
-} from "lucide-react";
 
 import { StatCard } from "@/components/dashboard/StatCard";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { SystemHealth } from "@/components/dashboard/SystemHealth";
 import { PendingApprovals } from "@/components/dashboard/PendingApprovals";
+import { IconBuilding, IconCalendar, IconFileText, IconSettings2, IconUser } from "@tabler/icons-react";
 
 export default function SuperAdminDashboard() {
   // Mock data - replace with real API calls
   const quickActions = [
-    { label: "Create Organization", icon: Building2, onClick: () => { } },
-    { label: "Manage Users", icon: Users, onClick: () => { } },
-    { label: "Review Resources", icon: FileText, onClick: () => { } },
-    { label: "System Settings", icon: Settings, onClick: () => { } },
+    { label: "Create Organization", icon: IconBuilding, onClick: () => { } },
+    { label: "Manage Users", icon: IconUser, onClick: () => { } },
+    { label: "Review Resources", icon: IconFileText, onClick: () => { } },
+    { label: "System Settings", icon: IconSettings2, onClick: () => { } },
   ];
 
   const recentActivities = [
@@ -87,28 +80,28 @@ export default function SuperAdminDashboard() {
             title="Total Organizations"
             value="248"
             description="+12 from last month"
-            icon={Building2}
+            icon={IconBuilding}
             trend={5.2}
           />
           <StatCard
             title="Active Users"
             value="1,842"
             description="+180 from last month"
-            icon={Users}
+            icon={IconUser}
             trend={10.8}
           />
           <StatCard
             title="Events This Month"
             value="64"
             description="+8 from last month"
-            icon={Calendar}
+            icon={IconCalendar}
             trend={14.3}
           />
           <StatCard
             title="Pending Reviews"
             value="23"
             description="Requires attention"
-            icon={AlertTriangle}
+            icon={IconSettings2}
           />
         </div>
 

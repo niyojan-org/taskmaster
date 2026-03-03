@@ -8,20 +8,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { 
-  LayoutGrid, 
-  Image, 
-  Flag, 
-  Sparkles,
-  CheckCircle,
-  TrendingUp
-} from "lucide-react";
+  IconLayoutGrid, 
+  IconPhoto, 
+  IconFlag, 
+  IconSparkles,
+  IconCircleCheck,
+  IconTrendingUp
+} from "@tabler/icons-react";
 
 export default function ResourceStats({ stats }) {
   const statCards = [
     {
       title: "Total Resources",
       value: stats?.total || 0,
-      icon: LayoutGrid,
+      icon: IconLayoutGrid,
       description: "All resources in system",
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
@@ -29,7 +29,7 @@ export default function ResourceStats({ stats }) {
     {
       title: "Carousel Items",
       value: stats?.carousel || 0,
-      icon: Image,
+      icon: IconPhoto,
       description: "Rotating banners",
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
@@ -37,7 +37,7 @@ export default function ResourceStats({ stats }) {
     {
       title: "Posters",
       value: stats?.poster || 0,
-      icon: Flag,
+      icon: IconFlag,
       description: "Event posters",
       color: "text-green-500",
       bgColor: "bg-green-500/10",
@@ -45,7 +45,7 @@ export default function ResourceStats({ stats }) {
     {
       title: "Active Resources",
       value: stats?.active || 0,
-      icon: CheckCircle,
+      icon: IconCircleCheck,
       description: "Currently active",
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10",
@@ -69,7 +69,7 @@ export default function ResourceStats({ stats }) {
             <div className="flex items-baseline gap-2">
               <div className="text-3xl font-bold">{stat.value}</div>
               {stat.value > 0 && (
-                <TrendingUp className="h-4 w-4 text-green-500" />
+                <IconTrendingUp className="h-4 w-4 text-green-500" />
               )}
             </div>
             <p className="text-xs text-muted-foreground mt-1">

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, LogOut } from "lucide-react";
+import { IconChevronDown, IconLogout } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 
@@ -23,7 +23,7 @@ export default function UserDropdown({ user, isOpen, onToggle, onLogout }) {
           </div>
         )}
         <span className="font-medium">{user?.name || 'User'}</span>
-        <ChevronDown size={16} />
+        <IconChevronDown size={16} />
       </button>
 
       {/* User Dropdown */}
@@ -57,7 +57,7 @@ export default function UserDropdown({ user, isOpen, onToggle, onLogout }) {
               onClick={onLogout}
               className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-left text-red-600 cursor-pointer"
             >
-              <LogOut size={16} />
+              <IconLogout size={16} />
               Logout
             </button>
           </motion.div>

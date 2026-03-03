@@ -12,20 +12,20 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Calendar,
-  Tag,
-  Star,
-  Ban,
-  AlertTriangle,
-  Eye,
-  Users,
-  Ticket,
-  BarChart2,
-  FileText,
-  CheckCircle,
-  XCircle,
-  Flag,
-} from "lucide-react";
+  IconCalendar,
+  IconTag,
+  IconStar,
+  IconBan,
+  IconAlertTriangle,
+  IconEye,
+  IconUsers,
+  IconTicket,
+  IconChartBar,
+  IconFileText,
+  IconCircleCheck,
+  IconCircleX,
+  IconFlag,
+} from "@tabler/icons-react";
 import {
   BarChart,
   Bar,
@@ -231,31 +231,31 @@ export default function EventDashboard() {
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard title="Total Events" value={summary.totalEvents} icon={Calendar} color="blue" />
-        <StatCard title="Blocked Events" value={summary.blockedEvents} icon={Ban} color="red" />
-        <StatCard title="Featured Events" value={summary.featuredEvents} icon={Star} color="yellow" />
-        <StatCard title="Fraudulent Events" value={summary.fraudulentEvents} icon={AlertTriangle} color="orange" />
-        <StatCard title="Published Events" value={summary.publishedEvents} icon={CheckCircle} color="green" />
-        <StatCard title="Draft Events" value={summary.draftEvents} icon={FileText} color="gray" />
-        <StatCard title="Completed Events" value={summary.completedEvents} icon={CheckCircle} color="blue" />
-        <StatCard title="Cancelled Events" value={summary.cancelledEvents} icon={XCircle} color="red" />
-        <StatCard title="Private Events" value={summary.privateEvents} icon={Tag} color="gray" />
-        <StatCard title="Public Events" value={summary.publicEvents} icon={Tag} color="blue" />
-        <StatCard title="Online Events" value={summary.onlineEvents} icon={Tag} color="indigo" />
-        <StatCard title="Offline Events" value={summary.offlineEvents} icon={Tag} color="green" />
-        <StatCard title="Hybrid Events" value={summary.hybridEvents} icon={Tag} color="purple" />
-        <StatCard title="Feedback Enabled Events" value={summary.feedbackEnabledEvents} icon={BarChart2} color="yellow" />
-        <StatCard title="Total Registrations" value={summary.totalRegistrations} icon={Users} color="purple" />
-        <StatCard title="Total View Count" value={summary.totalViewCount} icon={Eye} color="indigo" />
-        <StatCard title="Total Tickets Sold" value={summary.totalTicketsSold} icon={Ticket} color="green" />
-        <StatCard title="Total Fraud Flags" value={summary.totalFraudFlags} icon={Flag} color="red" />
-        <StatCard title="Critical Fraud Events" value={summary.criticalFraudEvents} icon={AlertTriangle} color="red" />
-        <StatCard title="Major Fraud Events" value={summary.majorFraudEvents} icon={AlertTriangle} color="orange" />
-        <StatCard title="Minor Fraud Events" value={summary.minorFraudEvents} icon={AlertTriangle} color="yellow" />
-        <StatCard title="Events With Sessions" value={summary.eventsWithSessions} icon={BarChart2} color="blue" />
-        <StatCard title="Events With Coupons" value={summary.eventsWithCoupons} icon={BarChart2} color="green" />
-        <StatCard title="Events With Attachments" value={summary.eventsWithAttachments} icon={BarChart2} color="gray" />
-        <StatCard title="Events With Media Gallery" value={summary.eventsWithMediaGallery} icon={BarChart2} color="purple" />
+        <StatCard title="Total Events" value={summary.totalEvents} icon={IconCalendar} color="blue" />
+        <StatCard title="Blocked Events" value={summary.blockedEvents} icon={IconBan} color="red" />
+        <StatCard title="Featured Events" value={summary.featuredEvents} icon={IconStar} color="yellow" />
+        <StatCard title="Fraudulent Events" value={summary.fraudulentEvents} icon={IconAlertTriangle} color="orange" />
+        <StatCard title="Published Events" value={summary.publishedEvents} icon={IconCircleCheck} color="green" />
+        <StatCard title="Draft Events" value={summary.draftEvents} icon={IconFileText} color="gray" />
+        <StatCard title="Completed Events" value={summary.completedEvents} icon={IconCircleCheck} color="blue" />
+        <StatCard title="Cancelled Events" value={summary.cancelledEvents} icon={IconCircleX} color="red" />
+        <StatCard title="Private Events" value={summary.privateEvents} icon={IconTag} color="gray" />
+        <StatCard title="Public Events" value={summary.publicEvents} icon={IconTag} color="blue" />
+        <StatCard title="Online Events" value={summary.onlineEvents} icon={IconTag} color="indigo" />
+        <StatCard title="Offline Events" value={summary.offlineEvents} icon={IconTag} color="green" />
+        <StatCard title="Hybrid Events" value={summary.hybridEvents} icon={IconTag} color="purple" />
+        <StatCard title="Feedback Enabled Events" value={summary.feedbackEnabledEvents} icon={IconChartBar} color="yellow" />
+        <StatCard title="Total Registrations" value={summary.totalRegistrations} icon={IconUsers} color="purple" />
+        <StatCard title="Total View Count" value={summary.totalViewCount} icon={IconEye} color="indigo" />
+        <StatCard title="Total Tickets Sold" value={summary.totalTicketsSold} icon={IconTicket} color="green" />
+        <StatCard title="Total Fraud Flags" value={summary.totalFraudFlags} icon={IconFlag} color="red" />
+        <StatCard title="Critical Fraud Events" value={summary.criticalFraudEvents} icon={IconAlertTriangle} color="red" />
+        <StatCard title="Major Fraud Events" value={summary.majorFraudEvents} icon={IconAlertTriangle} color="orange" />
+        <StatCard title="Minor Fraud Events" value={summary.minorFraudEvents} icon={IconAlertTriangle} color="yellow" />
+        <StatCard title="Events With Sessions" value={summary.eventsWithSessions} icon={IconChartBar} color="blue" />
+        <StatCard title="Events With Coupons" value={summary.eventsWithCoupons} icon={IconChartBar} color="green" />
+        <StatCard title="Events With Attachments" value={summary.eventsWithAttachments} icon={IconChartBar} color="gray" />
+        <StatCard title="Events With Media Gallery" value={summary.eventsWithMediaGallery} icon={IconChartBar} color="purple" />
       </div>
 
       {/* Charts */}

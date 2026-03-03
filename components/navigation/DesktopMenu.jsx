@@ -1,8 +1,7 @@
 "use client";
-
-import { ChevronDown } from "lucide-react";
-import * as Icons from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { IconChevronDown } from "@tabler/icons-react";
+import * as TablerIcons from "@tabler/icons-react";
 
 export default function DesktopMenu({ 
   menuItems, 
@@ -23,7 +22,7 @@ export default function DesktopMenu({
             <>
               <button className="flex items-center gap-1 text-gray-700 hover:text-black font-medium focus:outline-none">
                 {item.title}
-                <ChevronDown size={16} />
+                <IconChevronDown size={16} />
               </button>
 
               {/* Framer Motion Dropdown */}
@@ -37,7 +36,7 @@ export default function DesktopMenu({
                     className="absolute left-0 mt-2 w-64 bg-white border rounded shadow z-50"
                   >
                     {item.submenu.map((subItem, subIndex) => {
-                      const Icon = Icons[subItem.icon] || Icons.Circle;
+                      const Icon = TablerIcons[`Icon${subItem.icon}`] || TablerIcons.IconCircle;
                       return (
                         <li key={subIndex} className="border-b last:border-none">
                           <button

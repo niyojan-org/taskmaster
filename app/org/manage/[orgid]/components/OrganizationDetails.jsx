@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Building2, Mail, Phone, Globe, MapPin, Calendar, DollarSign, Users, TrendingUp, AlertTriangle, FileText, Shield, User } from 'lucide-react';
+import { IconBuilding, IconMail, IconPhone, IconWorld, IconMapPin, IconCalendar, IconCurrencyDollar, IconUsers, IconTrendingUp, IconAlertTriangle, IconFileText, IconShield, IconUser } from '@tabler/icons-react';
 import StatCard from './Details/StatCard';
 import FraudFlagsCard from './Details/FraudFlagsCard';
 import SupportContactCard from './Details/SupportContactCard';
@@ -25,7 +25,7 @@ export default function OrganizationDetails({ orgData }) {
       <Card className="hover:shadow-lg transition-shadow">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Building2 className="h-5 w-5 text-blue-600" />
+            <IconBuilding className="h-5 w-5 text-blue-600" />
             Basic Information
           </CardTitle>
           <CardDescription>Organization contact and basic details</CardDescription>
@@ -33,28 +33,28 @@ export default function OrganizationDetails({ orgData }) {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-gray-500" />
+              <IconMail className="h-4 w-4 text-gray-500" />
               <div>
                 <p className="text-sm font-medium text-gray-600">Email</p>
                 <p className="text-gray-900">{orgData.email}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="h-4 w-4 text-gray-500" />
+              <IconPhone className="h-4 w-4 text-gray-500" />
               <div>
                 <p className="text-sm font-medium text-gray-600">Phone</p>
                 <p className="text-gray-900">{orgData.phone}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Building2 className="h-4 w-4 text-gray-500" />
+              <IconBuilding className="h-4 w-4 text-gray-500" />
               <div>
                 <p className="text-sm font-medium text-gray-600">Category</p>
                 <p className="text-gray-900">{orgData.category} - {orgData.subCategory}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Globe className="h-4 w-4 text-gray-500" />
+              <IconWorld className="h-4 w-4 text-gray-500" />
               <div>
                 <p className="text-sm font-medium text-gray-600">Website</p>
                 <a href={orgData.website} target="_blank" rel="noopener noreferrer"
@@ -69,7 +69,7 @@ export default function OrganizationDetails({ orgData }) {
       <Card className="hover:shadow-lg transition-shadow">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Shield className="h-5 w-5 text-green-600" />
+            <IconShield className="h-5 w-5 text-green-600" />
             Status & Permissions
           </CardTitle>
           <CardDescription>Current organization status and capabilities</CardDescription>
@@ -97,7 +97,7 @@ export default function OrganizationDetails({ orgData }) {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-green-600" />
+              <IconTrendingUp className="h-5 w-5 text-green-600" />
               Statistics
             </CardTitle>
             <CardDescription>Performance metrics and activity summary</CardDescription>
@@ -107,25 +107,25 @@ export default function OrganizationDetails({ orgData }) {
               <StatCard
                 title="Events Hosted"
                 value={orgData.stats.totalEventsHosted || 0}
-                icon={Calendar}
+                icon={IconCalendar}
                 color="blue"
               />
               <StatCard
                 title="Tickets Sold"
                 value={orgData.stats.totalTicketsSold || 0}
-                icon={Users}
+                icon={IconUsers}
                 color="green"
               />
               <StatCard
                 title="Revenue"
                 value={`₹${orgData.stats.totalRevenueGenerated || 0}`}
-                icon={DollarSign}
+                icon={IconCurrencyDollar}
                 color="yellow"
               />
               <StatCard
                 title="Warnings"
                 value={orgData.stats.totalWarnings || 0}
-                icon={AlertTriangle}
+                icon={IconAlertTriangle}
                 color="red"
               />
             </div>
@@ -138,7 +138,7 @@ export default function OrganizationDetails({ orgData }) {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <User className="h-5 w-5 text-purple-600" />
+              <IconUser className="h-5 w-5 text-purple-600" />
               Administrator
             </CardTitle>
             <CardDescription>Organization admin contact information</CardDescription>
@@ -146,7 +146,7 @@ export default function OrganizationDetails({ orgData }) {
           <CardContent>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <User className="h-6 w-6 text-purple-600" />
+                <IconUser className="h-6 w-6 text-purple-600" />
               </div>
               <div>
                 <p className="font-medium text-gray-900">{orgData.admin.name}</p>
@@ -165,7 +165,7 @@ export default function OrganizationDetails({ orgData }) {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-orange-600" />
+              <IconMapPin className="h-5 w-5 text-orange-600" />
               Address
             </CardTitle>
             <CardDescription>Organization physical location</CardDescription>
@@ -184,7 +184,7 @@ export default function OrganizationDetails({ orgData }) {
       <Card className="hover:shadow-lg transition-shadow">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-gray-600" />
+            <IconFileText className="h-5 w-5 text-gray-600" />
             Additional Information
           </CardTitle>
           <CardDescription>Timestamps and other details</CardDescription>

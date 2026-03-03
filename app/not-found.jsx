@@ -2,7 +2,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Icon404 from "@/components/ui/404";
+import { cn } from "@/lib/utils";
 
 
 const Error404 = () => {
@@ -33,24 +35,21 @@ const Error404 = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Button asChild size={'lg'}>
-            <Link
-              href="/"
-              className=""
-              tabIndex={0}
-            >
-              Go Home
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size={'lg'}>
-            <Link
-              href="/contact"
-              className=""
-              tabIndex={0}
-            >
-              Contact Support
-            </Link>
-          </Button>
+          <Link
+            href="/"
+            className={cn(buttonVariants({ size: 'lg' }))}
+            tabIndex={0}
+          >
+            Go Home
+          </Link>
+
+          <Link
+            href="/contact"
+            className={cn(buttonVariants({ variant: "outline", size: 'lg' }))}
+            tabIndex={0}
+          >
+            Contact Support
+          </Link>
         </motion.div>
       </motion.div>
     </section>

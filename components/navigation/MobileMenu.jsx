@@ -1,11 +1,11 @@
 "use client";
 
-import { ChevronDown, X } from "lucide-react";
-import * as Icons from "lucide-react";
+import { IconChevronDown, IconX } from "@tabler/icons-react";
+import * as TablerIcons from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { LogOut } from "lucide-react";
+import { IconLogout } from "@tabler/icons-react";
 
 export default function MobileMenu({ 
   isOpen, 
@@ -33,7 +33,7 @@ export default function MobileMenu({
             className="absolute top-4 right-4 text-gray-700 focus:outline-none"
             onClick={onClose}
           >
-            <X size={24} />
+            <IconX size={24} />
           </button>
           <ul className="space-y-4 mt-8">
             {menuItems.map((item, index) => (
@@ -45,12 +45,12 @@ export default function MobileMenu({
                       onClick={() => setOpenMenuIndex(openMenuIndex === index ? null : index)}
                     >
                       {item.title}
-                      <ChevronDown size={16} />
+                      <IconChevronDown size={16} />
                     </button>
                     {openMenuIndex === index && (
                       <ul className="mt-2 space-y-2 pl-4">
                         {item.submenu.map((subItem, subIndex) => {
-                          const Icon = Icons[subItem.icon] || Icons.Circle;
+                          const Icon = TablerIcons[`Icon${subItem.icon}`] || TablerIcons.IconCircle;
                           return (
                             <li key={subIndex}>
                               <button
@@ -114,7 +114,7 @@ export default function MobileMenu({
                     onClick={onLogout}
                     className="flex items-center gap-2 text-red-600 hover:text-red-700 cursor-pointer w-full text-left px-2"
                   >
-                    <LogOut size={16} />
+                    <IconLogout size={16} />
                     Logout
                   </button>
                 </div>

@@ -6,7 +6,7 @@ import api from "@/lib/api";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Tag, AlertTriangle, Eye, Building2, Flag, Ban, CheckCircle, Ticket, Users } from "lucide-react";
+import { IconCalendar, IconTag, IconAlertTriangle, IconEye, IconBuilding, IconFlag, IconBan, IconCircleCheck, IconTicket, IconUsers } from "@tabler/icons-react";
 import { toast } from "sonner";
 
 export default function EventManageCenter() {
@@ -129,7 +129,7 @@ export default function EventManageCenter() {
                 <img src={event.bannerImage} alt={event.title} className="w-40 h-40 rounded-2xl object-cover border-2 border-gray-200" />
               ) : (
                 <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-                  <Calendar className="w-20 h-20 text-blue-400" />
+                  <IconCalendar className="w-20 h-20 text-blue-400" />
                 </div>
               )}
             </div>
@@ -147,10 +147,10 @@ export default function EventManageCenter() {
                 {event.isRegistrationOpen && <Badge variant="default" className="text-base">Registration Open</Badge>}
               </div>
               <div className="flex gap-2 items-center text-sm text-gray-500 mb-2 flex-wrap">
-                <Building2 className="h-4 w-4 text-gray-500" />
+                <IconBuilding className="h-4 w-4 text-gray-500" />
                 <span>{event.organization?.name}</span>
                 <span className="ml-2 text-xs text-gray-400">({event.organization?.email})</span>
-                <Tag className="h-4 w-4 text-gray-500 ml-4" />
+                <IconTag className="h-4 w-4 text-gray-500 ml-4" />
                 <span>{event.tags?.join(", ")}</span>
               </div>
               
@@ -161,7 +161,7 @@ export default function EventManageCenter() {
             <Card className="border-0 bg-indigo-50/40">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base font-semibold flex items-center gap-2">
-                  <Tag className="w-5 h-5 text-indigo-500" /> Event Meta Info
+                  <IconTag className="w-5 h-5 text-indigo-500" /> Event Meta Info
                 </CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-gray-700">
@@ -184,7 +184,7 @@ export default function EventManageCenter() {
             </Card>
             {/* Organization Details */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Building2 className="w-5 h-5 text-blue-500" /> Organization Details</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconBuilding className="w-5 h-5 text-blue-500" /> Organization Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-blue-50/50 rounded-lg p-4">
                   <div className="font-semibold text-gray-800">{event.organization?.name}</div>
@@ -196,7 +196,7 @@ export default function EventManageCenter() {
             </div>
             {/* Sessions */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Calendar className="w-5 h-5 text-blue-500" /> Sessions</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconCalendar className="w-5 h-5 text-blue-500" /> Sessions</h3>
               {event.sessions?.length ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {event.sessions.map((session) => (
@@ -221,7 +221,7 @@ export default function EventManageCenter() {
             </div>
             {/* Tickets */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Ticket className="w-5 h-5 text-indigo-500" /> Tickets</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconTicket className="w-5 h-5 text-indigo-500" /> Tickets</h3>
               {event.tickets?.length ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {event.tickets.map((ticket) => (
@@ -244,7 +244,7 @@ export default function EventManageCenter() {
             </div>
             {/* Input Fields */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Tag className="w-5 h-5 text-blue-500" /> Input Fields</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconTag className="w-5 h-5 text-blue-500" /> Input Fields</h3>
               {event.inputFields?.length ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {event.inputFields.map((field) => (
@@ -265,7 +265,7 @@ export default function EventManageCenter() {
             </div>
             {/* Fraud Flags */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Flag className="w-5 h-5 text-red-500" /> Fraud Flags</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconFlag className="w-5 h-5 text-red-500" /> Fraud Flags</h3>
               {event.fraudFlags?.length ? (
                 <ul className="space-y-2">
                   {event.fraudFlags.map((flag) => (
@@ -285,12 +285,12 @@ export default function EventManageCenter() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="border-0 bg-blue-50/60">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base font-semibold flex items-center gap-2"><Ban className="w-5 h-5 text-blue-500" /> Block/Unblock Event</CardTitle>
+                  <CardTitle className="text-base font-semibold flex items-center gap-2"><IconBan className="w-5 h-5 text-blue-500" /> Block/Unblock Event</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {event.isBlocked ? (
                     <Button onClick={handleUnblock} disabled={blockLoading} className="w-full bg-green-600 text-white">
-                      <CheckCircle className="w-4 h-4 mr-1" /> Unblock Event
+                      <IconCircleCheck className="w-4 h-4 mr-1" /> Unblock Event
                     </Button>
                   ) : (
                     <div className="space-y-2">
@@ -302,7 +302,7 @@ export default function EventManageCenter() {
                         className="w-full border rounded px-3 py-2 text-sm"
                       />
                       <Button onClick={handleBlock} disabled={blockLoading || !blockReason} className="w-full bg-red-600 text-white">
-                        <Ban className="w-4 h-4 mr-1" /> Block Event
+                        <IconBan className="w-4 h-4 mr-1" /> Block Event
                       </Button>
                     </div>
                   )}
@@ -310,7 +310,7 @@ export default function EventManageCenter() {
               </Card>
               <Card className="border-0 bg-red-50/60">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base font-semibold flex items-center gap-2"><Flag className="w-5 h-5 text-red-500" /> Flag Event</CardTitle>
+                  <CardTitle className="text-base font-semibold flex items-center gap-2"><IconFlag className="w-5 h-5 text-red-500" /> Flag Event</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <input
@@ -330,14 +330,14 @@ export default function EventManageCenter() {
                     <option value="critical">Critical</option>
                   </select>
                   <Button onClick={handleFlag} disabled={flagLoading || !flagReason} className="w-full bg-red-600 text-white">
-                    <Flag className="w-4 h-4 mr-1" /> Flag Event
+                    <IconFlag className="w-4 h-4 mr-1" /> Flag Event
                   </Button>
                 </CardContent>
               </Card>
             </div>
             {/* Attachments & Media Gallery */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Eye className="w-5 h-5 text-blue-500" /> Media Gallery & Attachments</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconEye className="w-5 h-5 text-blue-500" /> Media Gallery & Attachments</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {event.mediaGallery?.length ? event.mediaGallery.map((media, idx) => (
                   <Card key={idx} className="border-0 bg-blue-50/40">
@@ -357,7 +357,7 @@ export default function EventManageCenter() {
             </div>
             {/* Guest Speakers */}
             <div>
-              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><Users className="w-5 h-5 text-blue-500" /> Guest Speakers</h3>
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2"><IconUsers className="w-5 h-5 text-blue-500" /> Guest Speakers</h3>
               {event.guestSpeakers?.length ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {event.guestSpeakers.map((speaker, idx) => (

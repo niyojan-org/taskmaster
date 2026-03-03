@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle } from 'lucide-react';
+import { IconAlertTriangle } from '@tabler/icons-react';
 
 export default function FraudFlagsCard({ fraudFlags, formatDate }) {
   if (!fraudFlags || fraudFlags.length === 0) return null;
@@ -8,7 +8,7 @@ export default function FraudFlagsCard({ fraudFlags, formatDate }) {
     <Card className="hover:shadow-lg transition-shadow border-red-200">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-red-600">
-          <AlertTriangle className="h-5 w-5" />
+          <IconAlertTriangle className="h-5 w-5" />
           Fraud Flags
         </CardTitle>
         <CardDescription>Security flags and warnings</CardDescription>

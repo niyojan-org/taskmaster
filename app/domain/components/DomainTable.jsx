@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
   Table,
   TableBody,
@@ -20,17 +21,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  MoreHorizontal, 
-  Edit, 
-  Trash2, 
-  ExternalLink,
-  CheckCircle2,
-  XCircle,
-  Copy,
-  Eye,
-  Globe
-} from 'lucide-react';
+import {
+  IconDots,
+  IconEdit,
+  IconTrash,
+  IconExternalLink,
+  IconCircleCheck,
+  IconCircleX,
+  IconCopy,
+  IconEye,
+  IconWorld
+} from '@tabler/icons-react';
 import { toast } from 'sonner';
 
 export default function DomainTable({ domains, onEdit, onDelete, onView }) {
@@ -62,7 +63,7 @@ export default function DomainTable({ domains, onEdit, onDelete, onView }) {
 
   const getPurposeBadges = (purposes) => {
     if (!purposes) return null;
-    
+
     const activePurposes = Object.entries(purposes)
       .filter(([_, value]) => value === true)
       .map(([key]) => key);
@@ -78,7 +79,7 @@ export default function DomainTable({ domains, onEdit, onDelete, onView }) {
     return (
       <Card>
         <CardContent className="flex flex-col items-center justify-center py-12">
-          <Globe className="h-12 w-12 text-muted-foreground mb-4" />
+          <IconWorld className="h-12 w-12 text-muted-foreground mb-4" />
           <p className="text-lg font-medium text-muted-foreground">No domains found</p>
           <p className="text-sm text-muted-foreground mt-2">
             Create your first domain to get started
@@ -116,9 +117,9 @@ export default function DomainTable({ domains, onEdit, onDelete, onView }) {
                         onClick={() => copyToClipboard(domain.domain, 'Domain')}
                       >
                         {copiedId === domain.domain ? (
-                          <CheckCircle2 className="h-3 w-3 text-green-600" />
+                          <IconCircleCheck className="h-3 w-3 text-green-600" />
                         ) : (
-                          <Copy className="h-3 w-3" />
+                          <IconCopy className="h-3 w-3" />
                         )}
                       </Button>
                       <a
@@ -127,26 +128,26 @@ export default function DomainTable({ domains, onEdit, onDelete, onView }) {
                         rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-foreground"
                       >
-                        <ExternalLink className="h-3 w-3" />
+                        <IconExternalLink className="h-3 w-3" />
                       </a>
                     </div>
                   </TableCell>
                   <TableCell>
                     {domain.isActive ? (
                       <Badge className="bg-green-100 text-green-800 border-green-300">
-                        <CheckCircle2 className="h-3 w-3 mr-1" />
+                        <IconCircleCheck className="h-3 w-3 mr-1" />
                         Active
                       </Badge>
                     ) : (
                       <Badge variant="secondary" className="bg-gray-100 text-gray-800 border-gray-300">
-                        <XCircle className="h-3 w-3 mr-1" />
+                        <IconCircleX className="h-3 w-3 mr-1" />
                         Inactive
                       </Badge>
                     )}
                   </TableCell>
                   <TableCell>
-                    <Badge 
-                      variant="outline" 
+                    <Badge
+                      variant="outline"
                       className={getEnvironmentColor(domain.environment)}
                     >
                       {domain.environment}
@@ -158,40 +159,38 @@ export default function DomainTable({ domains, onEdit, onDelete, onView }) {
                     </div>
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
-                    {domain.createdAt 
+                    {domain.createdAt
                       ? new Date(domain.createdAt).toLocaleDateString()
                       : '-'}
                   </TableCell>
                   <TableCell className="text-right">
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                          <span className="sr-only">Open menu</span>
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
+                      <DropdownMenuTrigger className={cn(buttonVariants({ variant: "ghost" }), "h-8 w-8 p-0")}>
+                        <span className="sr-only">Open menu</span>
+                        <IconDots className="h-4 w-4" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem 
+                        <DropdownMenuItem
                           onClick={() => copyToClipboard(domain._id, 'Domain ID')}
                         >
-                          <Copy className="mr-2 h-4 w-4" />
+                          <IconCopy className="mr-2 h-4 w-4" />
                           Copy ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => onView?.(domain)}>
-                          <Eye className="mr-2 h-4 w-4" />
+                          <IconEye className="mr-2 h-4 w-4" />
                           View Details
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => onEdit(domain)}>
-                          <Edit className="mr-2 h-4 w-4" />
+                          <IconEdit className="mr-2 h-4 w-4" />
                           Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => onDelete(domain)}
                           className="text-red-600"
                         >
-                          <Trash2 className="mr-2 h-4 w-4" />
+                          <IconTrash className="mr-2 h-4 w-4" />
                           Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>

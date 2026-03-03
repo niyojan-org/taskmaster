@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { FileText } from 'lucide-react';
+import { IconFileText } from '@tabler/icons-react';
 import { Badge } from '@/components/ui/badge';
 
 export default function DocumentsCard({ documents, formatDate }) {
@@ -8,7 +8,7 @@ export default function DocumentsCard({ documents, formatDate }) {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5 text-indigo-600" />
+          <IconFileText className="h-5 w-5 text-indigo-600" />
           Documents
         </CardTitle>
         <CardDescription>Uploaded verification documents</CardDescription>

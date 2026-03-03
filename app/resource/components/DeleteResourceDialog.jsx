@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { IconTrash } from "@tabler/icons-react";
 
 export default function DeleteResourceDialog({
   open,
@@ -40,7 +40,7 @@ export default function DeleteResourceDialog({
             Cancel
           </Button>
           <Button variant="destructive" onClick={onConfirm}>
-            <Trash2 className="mr-2 h-4 w-4" />
+            <IconTrash className="mr-2 h-4 w-4" />
             Delete
           </Button>
         </DialogFooter>

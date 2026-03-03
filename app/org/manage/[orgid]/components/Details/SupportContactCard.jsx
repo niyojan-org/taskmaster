@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Phone } from 'lucide-react';
+import { IconPhone } from '@tabler/icons-react';
 
 export default function SupportContactCard({ supportContact }) {
   if (!supportContact) return null;
@@ -7,7 +7,7 @@ export default function SupportContactCard({ supportContact }) {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Phone className="h-5 w-5 text-blue-600" />
+          <IconPhone className="h-5 w-5 text-blue-600" />
           Support Contact
         </CardTitle>
         <CardDescription>Organization support contact information</CardDescription>

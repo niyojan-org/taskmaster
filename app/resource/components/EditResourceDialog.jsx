@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Edit, RefreshCw } from "lucide-react";
+import { IconEdit, IconRefresh } from "@tabler/icons-react";
 
 const CATEGORIES = [
   { value: "documents", label: "Documents" },
@@ -158,12 +158,12 @@ export default function EditResourceDialog({
           <Button onClick={handleSubmit} disabled={uploading}>
             {uploading ? (
               <>
-                <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+                <IconRefresh className="mr-2 h-4 w-4 animate-spin" />
                 Updating...
               </>
             ) : (
               <>
-                <Edit className="mr-2 h-4 w-4" />
+                <IconEdit className="mr-2 h-4 w-4" />
                 Update Resource
               </>
             )}

@@ -11,13 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
-  Edit,
-  Trash2,
-  Download,
-  ExternalLink,
-  Eye,
-  EyeOff,
-} from "lucide-react";
+  IconEdit,
+  IconTrash,
+  IconDownload,
+  IconExternalLink,
+  IconEye,
+  IconEyeOff,
+} from "@tabler/icons-react";
 
 export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
   const [imageError, setImageError] = useState(false);
@@ -38,12 +38,12 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
             <Badge variant={resource.active ? "default" : "secondary"} className="text-xs">
               {resource.active ? (
                 <>
-                  <Eye className="h-3 w-3 mr-1" />
+                  <IconEye className="h-3 w-3 mr-1" />
                   Active
                 </>
               ) : (
                 <>
-                  <EyeOff className="h-3 w-3 mr-1" />
+                  <IconEyeOff className="h-3 w-3 mr-1" />
                   Inactive
                 </>
               )}
@@ -74,7 +74,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
           ) : (
             <div className="h-full w-full flex items-center justify-center text-muted-foreground">
               <div className="text-center">
-                <ExternalLink className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                <IconExternalLink className="h-12 w-12 mx-auto mb-2 opacity-50" />
                 <p className="text-sm">Preview unavailable</p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
         <div className="space-y-1.5 text-xs text-muted-foreground">
           {resource.link && (
             <div className="flex items-center gap-2">
-              <ExternalLink className="h-3 w-3" />
+              <IconExternalLink className="h-3 w-3" />
               <a
                 href={resource.link}
                 target="_blank"
@@ -129,7 +129,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
             className="flex-1"
             onClick={() => window.open(resource.url, "_blank")}
           >
-            <Download className="h-3.5 w-3.5 mr-1.5" />
+            <IconDownload className="h-3.5 w-3.5 mr-1.5" />
             View
           </Button>
           {isAdmin && (
@@ -139,7 +139,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
                 size="sm"
                 onClick={() => onEdit(resource)}
               >
-                <Edit className="h-3.5 w-3.5" />
+                <IconEdit className="h-3.5 w-3.5" />
               </Button>
               <Button
                 variant="outline"
@@ -147,7 +147,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
                 className="hover:bg-destructive hover:text-destructive-foreground"
                 onClick={() => onDelete(resource)}
               >
-                <Trash2 className="h-3.5 w-3.5" />
+                <IconTrash className="h-3.5 w-3.5" />
               </Button>
             </>
           )}

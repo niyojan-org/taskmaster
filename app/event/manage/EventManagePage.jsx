@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, Calendar, Tag, Building2, Star, Ban, AlertTriangle, ArrowRight } from "lucide-react";
+import { IconEye, IconCalendar, IconTag, IconBuilding, IconStar, IconBan, IconAlertTriangle, IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function EventManagePage() {
@@ -132,7 +132,7 @@ export default function EventManagePage() {
               />
             ) : (
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-                <Calendar className="w-7 h-7 text-blue-400" />
+                <IconCalendar className="w-7 h-7 text-blue-400" />
               </div>
             )}
             <div>
@@ -175,19 +175,19 @@ export default function EventManagePage() {
         <div className="space-y-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
             <div className="flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-gray-500" />
+              <IconBuilding className="h-4 w-4 text-gray-500" />
               <span className="truncate">{event.organization?.name}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Tag className="h-4 w-4 text-gray-500" />
+              <IconTag className="h-4 w-4 text-gray-500" />
               <span>{event.tags?.join(", ")}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-gray-500" />
+              <IconCalendar className="h-4 w-4 text-gray-500" />
               <span>{new Date(event.createdAt).toLocaleDateString()}</span>
             </div>
             <div className="flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-gray-500" />
+              <IconAlertTriangle className="h-4 w-4 text-gray-500" />
               <span>{event.fraudFlags?.length || 0} Fraud Flags</span>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function EventManagePage() {
             </div>
             <Link href={`/event/${event._id}`}>
               <Button size="sm" className="cursor-pointer">
-                <Eye className="w-4 h-4 mr-1" />
+                <IconEye className="w-4 h-4 mr-1" />
                 Manage
               </Button>
             </Link>

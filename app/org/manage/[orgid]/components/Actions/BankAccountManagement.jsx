@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
+import { IconCircleCheck } from '@tabler/icons-react';
 
 export default function BankAccountManagement({ bankAccount, loading, makeApiCall }) {
   if (!bankAccount) return null;
@@ -16,7 +16,7 @@ export default function BankAccountManagement({ bankAccount, loading, makeApiCal
           disabled={loading}
           className="cursor-pointer bg-green-600 hover:bg-green-700 text-white"
         >
-          <CheckCircle className="w-3 h-3 mr-1" />
+          <IconCircleCheck className="w-3 h-3 mr-1" />
           Verify
         </Button>
       </div>

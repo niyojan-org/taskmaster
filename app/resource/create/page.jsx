@@ -25,17 +25,17 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { 
-  ArrowLeft, 
-  Upload, 
-  RefreshCw, 
-  X, 
-  Image as ImageIcon,
-  CheckCircle,
-  Sparkles,
-  Link as LinkIcon,
-  Tag,
-  AlertCircle
-} from "lucide-react";
+  IconArrowLeft, 
+  IconUpload, 
+  IconRefresh, 
+  IconX, 
+  IconPhoto,
+  IconCircleCheck,
+  IconSparkles,
+  IconLink,
+  IconTag,
+  IconAlertCircle
+} from "@tabler/icons-react";
 
 const RESOURCE_TYPES = [
   { value: 'logo', label: 'Logo', icon: '🎨', description: 'Brand logos and marks' },
@@ -159,7 +159,7 @@ export default function CreateResourcePage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/20">
         <div className="text-center">
-          <RefreshCw className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
+          <IconRefresh className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>
@@ -176,7 +176,7 @@ export default function CreateResourcePage() {
             onClick={() => router.push("/resource")}
             className="mb-4 hover:bg-primary/10"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <IconArrowLeft className="mr-2 h-4 w-4" />
             Back to Resources
           </Button>
           <div className="space-y-2">
@@ -197,7 +197,7 @@ export default function CreateResourcePage() {
               <Card className="border-2 shadow-lg sticky top-6">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Upload className="h-5 w-5" />
+                    <IconUpload className="h-5 w-5" />
                     File Upload
                   </CardTitle>
                   <CardDescription>
@@ -220,7 +220,7 @@ export default function CreateResourcePage() {
                         className="cursor-pointer flex flex-col items-center gap-3"
                       >
                         <div className="bg-primary/10 p-4 rounded-full">
-                          <ImageIcon className="h-8 w-8 text-primary" />
+                          <IconPhoto className="h-8 w-8 text-primary" />
                         </div>
                         <div>
                           <p className="font-medium mb-1">Click to upload</p>
@@ -245,12 +245,12 @@ export default function CreateResourcePage() {
                             onClick={handleRemoveFile}
                             className="absolute top-2 right-2 bg-destructive text-destructive-foreground rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
                           >
-                            <X className="h-4 w-4" />
+                            <IconX className="h-4 w-4" />
                           </button>
                         </div>
                       ) : (
                         <div className="border-2 rounded-lg p-6 bg-muted/50">
-                          <ImageIcon className="h-12 w-12 mx-auto mb-2 text-muted-foreground" />
+                          <IconPhoto className="h-12 w-12 mx-auto mb-2 text-muted-foreground" />
                           <p className="text-sm text-center text-muted-foreground">
                             No preview available
                           </p>
@@ -275,7 +275,7 @@ export default function CreateResourcePage() {
                         className="w-full"
                         disabled={uploading}
                       >
-                        <X className="h-4 w-4 mr-2" />
+                        <IconX className="h-4 w-4 mr-2" />
                         Remove File
                       </Button>
                     </div>
@@ -290,7 +290,7 @@ export default function CreateResourcePage() {
               <Card className="border-2 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5" />
+                    <IconSparkles className="h-5 w-5" />
                     Basic Information
                   </CardTitle>
                   <CardDescription>
@@ -386,7 +386,7 @@ export default function CreateResourcePage() {
                     {/* Link */}
                     <div className="md:col-span-2 space-y-2">
                       <Label htmlFor="link" className="flex items-center gap-2">
-                        <LinkIcon className="h-4 w-4" />
+                        <IconLink className="h-4 w-4" />
                         External Link (Optional)
                       </Label>
                       <Input
@@ -409,7 +409,7 @@ export default function CreateResourcePage() {
               <Card className="border-2 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Tag className="h-5 w-5" />
+                    <IconTag className="h-5 w-5" />
                     Tags & Status
                   </CardTitle>
                   <CardDescription>
@@ -461,7 +461,7 @@ export default function CreateResourcePage() {
                             onClick={() => handleRemoveTag(tag)}
                             className="ml-2 hover:bg-destructive/20 rounded-full p-0.5"
                           >
-                            <X className="h-3 w-3" />
+                            <IconX className="h-3 w-3" />
                           </button>
                         </Badge>
                       ))}
@@ -471,7 +471,7 @@ export default function CreateResourcePage() {
                   {/* Active Status */}
                   <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border">
                     <div className="flex items-center gap-3">
-                      <CheckCircle className={`h-5 w-5 ${formData.active ? 'text-green-500' : 'text-muted-foreground'}`} />
+                      <IconCircleCheck className={`h-5 w-5 ${formData.active ? 'text-green-500' : 'text-muted-foreground'}`} />
                       <div>
                         <Label className="cursor-pointer">Active Status</Label>
                         <p className="text-xs text-muted-foreground">
@@ -503,7 +503,7 @@ export default function CreateResourcePage() {
                       disabled={uploading}
                       className="flex-1 h-12"
                     >
-                      <X className="mr-2 h-4 w-4" />
+                      <IconX className="mr-2 h-4 w-4" />
                       Cancel
                     </Button>
                     <Button 
@@ -513,12 +513,12 @@ export default function CreateResourcePage() {
                     >
                       {uploading ? (
                         <>
-                          <RefreshCw className="mr-2 h-5 w-5 animate-spin" />
+                          <IconRefresh className="mr-2 h-5 w-5 animate-spin" />
                           Creating Resource...
                         </>
                       ) : (
                         <>
-                          <Upload className="mr-2 h-5 w-5" />
+                          <IconUpload className="mr-2 h-5 w-5" />
                           Create Resource
                         </>
                       )}
@@ -526,7 +526,7 @@ export default function CreateResourcePage() {
                   </div>
                   {(!selectedFile || !formData.title) && (
                     <div className="flex items-center gap-2 mt-3 text-sm text-muted-foreground">
-                      <AlertCircle className="h-4 w-4" />
+                      <IconAlertCircle className="h-4 w-4" />
                       <span>Please upload a file and enter a title to continue</span>
                     </div>
                   )}
