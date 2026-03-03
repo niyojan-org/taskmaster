@@ -205,13 +205,13 @@ export default function ResourceDashboard() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+        <div className="min-h-screen bg-linear-to-br from-background via-background to-muted/20">
             <div className="container mx-auto p-6 max-w-7xl">
                 {/* Header */}
                 <div className="mb-8">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div className="space-y-2">
-                            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                            <h1 className="text-4xl font-bold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                                 Resource Control Panel
                             </h1>
                             <p className="text-muted-foreground text-lg">
@@ -219,7 +219,7 @@ export default function ResourceDashboard() {
                             </p>
                         </div>
                         {isAuthenticated && isAdmin && (
-                            <Button 
+                            <Button
                                 onClick={() => router.push("/resource/create")}
                                 size="lg"
                                 className="shadow-lg hover:shadow-xl transition-shadow"
@@ -266,7 +266,7 @@ export default function ResourceDashboard() {
                                     : "Check back later for new resources"}
                             </p>
                             {isAdmin && (
-                                <Button 
+                                <Button
                                     onClick={() => router.push("/resource/create")}
                                     size="lg"
                                 >

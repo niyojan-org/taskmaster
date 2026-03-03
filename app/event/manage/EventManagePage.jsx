@@ -131,7 +131,7 @@ export default function EventManagePage() {
                 className="w-12 h-12 rounded-xl object-cover border-2 border-gray-200"
               />
             ) : (
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
                 <IconCalendar className="w-7 h-7 text-blue-400" />
               </div>
             )}
@@ -423,12 +423,12 @@ export default function EventManagePage() {
           <h3 className="text-lg font-medium text-gray-900 mb-2">No Events Found</h3>
           <p className="text-gray-500 mb-4">
             {filters.search ||
-            filters.category ||
-            filters.status ||
-            filters.isBlocked ||
-            filters.featured ||
-            filters.fraudulent ||
-            filters.orgId
+              filters.category ||
+              filters.status ||
+              filters.isBlocked ||
+              filters.featured ||
+              filters.fraudulent ||
+              filters.orgId
               ? "Try adjusting your filters to see more results."
               : "No events have been created yet."}
           </p>
@@ -439,10 +439,10 @@ export default function EventManagePage() {
             filters.featured ||
             filters.fraudulent ||
             filters.orgId) && (
-            <Button onClick={handleReset} variant="outline" className="cursor-pointer">
-              Clear Filters
-            </Button>
-          )}
+              <Button onClick={handleReset} variant="outline" className="cursor-pointer">
+                Clear Filters
+              </Button>
+            )}
         </div>
       )}
     </div>

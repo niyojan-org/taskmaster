@@ -120,15 +120,15 @@ export default function EventManageCenter() {
   if (!event) return null;
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen py-10 px-0">
+    <div className="bg-linear-to-br from-blue-50 via-white to-indigo-50 min-h-screen py-10 px-0">
       <div className="w-full max-w-7xl mx-auto">
         <Card className="shadow-2xl border-0 w-full overflow-hidden">
           <CardHeader className="flex flex-col md:flex-row items-center gap-8 pb-8">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               {event.bannerImage ? (
                 <img src={event.bannerImage} alt={event.title} className="w-40 h-40 rounded-2xl object-cover border-2 border-gray-200" />
               ) : (
-                <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                <div className="w-40 h-40 rounded-2xl bg-linear-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
                   <IconCalendar className="w-20 h-20 text-blue-400" />
                 </div>
               )}
@@ -153,7 +153,7 @@ export default function EventManageCenter() {
                 <IconTag className="h-4 w-4 text-gray-500 ml-4" />
                 <span>{event.tags?.join(", ")}</span>
               </div>
-              
+
             </div>
           </CardHeader>
           <CardContent className="space-y-10">

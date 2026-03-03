@@ -34,7 +34,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
               {resource.description || "No description provided"}
             </CardDescription>
           </div>
-          <div className="flex items-center gap-1 flex-shrink-0">
+          <div className="flex items-center gap-1 shrink-0">
             <Badge variant={resource.active ? "default" : "secondary"} className="text-xs">
               {resource.active ? (
                 <>
@@ -63,7 +63,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Preview */}
-        <div className="relative bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden h-48 group/image">
+        <div className="relative bg-linear-to-br from-muted to-muted/50 rounded-lg overflow-hidden h-48 group/image">
           {!imageError ? (
             <img
               src={resource.url}
@@ -79,7 +79,7 @@ export default function ResourceCard({ resource, isAdmin, onEdit, onDelete }) {
               </div>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity" />
         </div>
 
         {/* Tags */}

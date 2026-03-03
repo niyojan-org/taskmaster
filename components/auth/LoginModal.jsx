@@ -51,7 +51,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-gradient-to-br from-blue-50/80 via-white/60 to-indigo-50/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-linear-to-br from-blue-50/80 via-white/60 to-indigo-50/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={handleClose}
         >
           {/* Background Pattern */}
@@ -76,7 +76,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
 
               <CardHeader className="text-center pb-6 pt-8">
                 {/* Logo/Icon */}
-                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                <div className="mx-auto w-16 h-16 bg-linear-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <span className="text-2xl font-bold text-white">EMS</span>
                 </div>
                 <CardTitle className="text-2xl font-bold text-gray-800 mb-2">Welcome Back</CardTitle>
@@ -127,7 +127,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
                 <Button
                   onClick={handleSubmit}
                   disabled={loading || !credentials.email || !credentials.password}
-                  className="w-full h-12 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
+                  className="w-full h-12 bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">

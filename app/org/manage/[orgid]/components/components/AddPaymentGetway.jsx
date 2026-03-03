@@ -36,7 +36,7 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.razorpayAccountId && !formData.cashfreeAccountId) {
       toast.error('Please provide at least one payment gateway account ID');
       return;
@@ -81,7 +81,7 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
       {hasAnyGateway && (
         <div className="space-y-3">
           {razorpayExists && (
-            <Card className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+            <Card className="p-4 bg-linear-to-r from-blue-50 to-indigo-50 border-blue-200">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
@@ -98,7 +98,7 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
           )}
 
           {cashfreeExists && (
-            <Card className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
+            <Card className="p-4 bg-linear-to-r from-purple-50 to-pink-50 border-purple-200">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
@@ -137,7 +137,7 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
 
       {/* Dialog for Add/Edit */}
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className="sm:max-w-125">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               {hasAnyGateway ? (
@@ -153,8 +153,8 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
               )}
             </DialogTitle>
             <DialogDescription>
-              {hasAnyGateway 
-                ? 'Update payment gateway account details for this organization.' 
+              {hasAnyGateway
+                ? 'Update payment gateway account details for this organization.'
                 : 'Add payment gateway account details for this organization. Provide at least one gateway account ID.'}
             </DialogDescription>
           </DialogHeader>
@@ -215,10 +215,10 @@ export default function AddPaymentGetway({ orgId, orgData, onUpdate }) {
               </div>
             </div>
             <DialogFooter>
-              <Button 
-                type="button" 
-                variant="outline" 
-                onClick={handleClose} 
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleClose}
                 className="cursor-pointer"
                 disabled={loading}
               >
