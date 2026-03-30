@@ -136,7 +136,7 @@ export default function EventDashboard() {
     try {
       setLoading(true);
       setError("");
-      const response = await api.get("/tm/event/summary");
+      const response = await api.get("/taskmaster/event/summary");
       if (response.data.success) {
         setSummary(response.data.summary);
       } else {

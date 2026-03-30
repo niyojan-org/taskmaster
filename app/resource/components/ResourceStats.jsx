@@ -1,83 +1,123 @@
-"use client";
-
+import useResourceStore from "@/store/resourceStore";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { 
-  IconLayoutGrid, 
-  IconPhoto, 
-  IconFlag, 
-  IconSparkles,
-  IconCircleCheck,
-  IconTrendingUp
+  IconFiles,
+  IconFileCheck,
+  IconFileOff,
+  IconArchive,
+  IconWorld,
+  IconLock,
+  IconCloudUpload,
+  IconStar,
 } from "@tabler/icons-react";
+import { useState, useEffect } from "react";
+import { resourceAPI } from "@/lib/api";
 
-export default function ResourceStats({ stats }) {
+export default function ResourceStats() {
+  const { totalResources } = useResourceStore();
+  const [stats, setStats] = useState({
+    total: 0,
+    active: 0,
+    inactive: 0,
+    archived: 0,
+    public: 0,
+    private: 0,
+    processing: 0,
+    highPriority: 0,
+  });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      setLoading(true);
+      // Fetch stats from different status/filters
+      const [activeRes, inactiveRes, archivedRes, publicRes, processingRes] = await Promise.all([
+        resourceAPI.listResources({ status: "active", limit: 1 }),
+        resourceAPI.listResources({ status: "inactive", limit: 1 }),
+        resourceAPI.listResources({ status: "archived", limit: 1 }),
+        resourceAPI.listResources({ isPublic: true, limit: 1 }),
+        resourceAPI.listResources({ status: "processing", limit: 1 }),
+      ]);
+
+      setStats({
+        total: totalResources,
+        active: activeRes.data.pagination?.total || 0,
+        inactive: inactiveRes.data.pagination?.total || 0,
+        archived: archivedRes.data.pagination?.total || 0,
+        public: publicRes.data.pagination?.total || 0,
+        private: totalResources - (publicRes.data.pagination?.total || 0),
+        processing: processingRes.data.pagination?.total || 0,
+        highPriority: 0, // Can be calculated from minPriority filter
+      });
+    } catch (error) {
+      console.error("Failed to fetch stats:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const statCards = [
     {
       title: "Total Resources",
-      value: stats?.total || 0,
-      icon: IconLayoutGrid,
-      description: "All resources in system",
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10",
+      value: totalResources,
+      icon: IconFiles,
+      description: "All resources",
+      color: "text-primary",
     },
     {
-      title: "Carousel Items",
-      value: stats?.carousel || 0,
-      icon: IconPhoto,
-      description: "Rotating banners",
-      color: "text-purple-500",
-      bgColor: "bg-purple-500/10",
-    },
-    {
-      title: "Posters",
-      value: stats?.poster || 0,
-      icon: IconFlag,
-      description: "Event posters",
-      color: "text-green-500",
-      bgColor: "bg-green-500/10",
-    },
-    {
-      title: "Active Resources",
-      value: stats?.active || 0,
-      icon: IconCircleCheck,
+      title: "Active",
+      value: stats.active,
+      icon: IconFileCheck,
       description: "Currently active",
-      color: "text-emerald-500",
-      bgColor: "bg-emerald-500/10",
+      color: "text-green-600 dark:text-green-400",
+    },
+    {
+      title: "Public",
+      value: stats.public,
+      icon: IconWorld,
+      description: "Publicly accessible",
+      color: "text-purple-600 dark:text-purple-400",
+    },
+    {
+      title: "Archived",
+      value: stats.archived,
+      icon: IconArchive,
+      description: "Soft-deleted",
+      color: "text-muted-foreground",
     },
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-      {statCards.map((stat, index) => (
-        <Card key={index} className="relative overflow-hidden group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/30">
-          <div className={`absolute top-0 right-0 w-32 h-32 ${stat.bgColor} rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-70 transition-opacity`} />
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              {stat.title}
-            </CardTitle>
-            <div className={`${stat.bgColor} p-2 rounded-lg`}>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold">{stat.value}</div>
-              {stat.value > 0 && (
-                <IconTrendingUp className="h-4 w-4 text-green-500" />
-              )}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {stat.description}
-            </p>
-          </CardContent>
-        </Card>
-      ))}
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {statCards.map((stat, index) => {
+        const Icon = stat.icon;
+        return (
+          <Card key={index}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                {stat.title}
+              </CardTitle>
+              <Icon className={`h-4 w-4 ${stat.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {loading ? (
+                  <div className="h-8 w-16 bg-muted animate-pulse rounded" />
+                ) : (
+                  stat.value
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {stat.description}
+              </p>
+            </CardContent>
+          </Card>
+        );
+      })}
     </div>
   );
 }

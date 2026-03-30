@@ -3,17 +3,18 @@
 import { useState } from 'react';
 import api from '@/lib/api';
 import { Button } from '@/components/ui/button';
-import { IconShield, IconBan, IconCircleCheck, IconAlertTriangle, IconCalendar, IconFlag, IconSettings, IconLoader2, IconFileText } from '@tabler/icons-react';
+import { IconShield, IconBan, IconCircleCheck, IconAlertTriangle, IconCalendar, IconFlag, IconSettings, IconLoader2, IconFileText, IconBuildingBank, IconCircleX } from '@tabler/icons-react';
 import { toast } from 'sonner';
 import ActionCard from './Actions/ActionCard';
 import DocumentManagement from './Actions/DocumentManagement';
 import BankAccountManagement from './Actions/BankAccountManagement';
 import BlockOrganizationDialog from './Actions/BlockOrganizationDialog';
 import VerifyOrganizationDialog from './Actions/VerifyOrganizationDialog';
+import RejectOrganizationDialog from './Actions/RejectOrganizationDialog';
 import FraudFlagDialog from './Actions/FraudFlagDialog';
 import WarningDialog from './Actions/WarningDialog';
 import PendingFraudFlags from './Actions/PendingFraudFlags';
-import AddPaymentGetway from './components/AddPaymentGetway';
+import AddPaymentGetway from './Details/AddPaymentGetway';
 
 export default function OrganizationActions({ orgId, orgData, onUpdate }) {
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
     try {
       setLoading(true);
       const response = await api({
-        url: `/tm/org/${orgId}${endpoint}`,
+        url: `/organizations/taskmaster/${orgId}${endpoint}`,
         method,
         data: body
       });
@@ -52,6 +53,10 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
   };
 
   const handleFormSubmit = (endpoint, body, dialogName) => {
+    // Ensure allowsEventCreation is included in verify request
+    if (endpoint === '/verify' && !body.hasOwnProperty('allowsEventCreation')) {
+      body.allowsEventCreation = true;
+    }
     makeApiCall(endpoint, 'PATCH', body);
     handleDialogClose(dialogName);
   };
@@ -91,15 +96,28 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
 
           {/* Verification */}
           {!orgData.verified ? (
-            <Button
-              onClick={() => setShowDialogs(prev => ({ ...prev, verify: true }))}
-              variant="default"
-              className="w-full bg-green-600 hover:bg-green-700 cursor-pointer"
-              disabled={loading}
-            >
-              {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconCircleCheck className="w-4 h-4 mr-2" />}
-              Verify Organization
-            </Button>
+            <div className="space-y-2">
+              <Button
+                onClick={() => setShowDialogs(prev => ({ ...prev, verify: true }))}
+                variant="default"
+                className="w-full bg-green-600 hover:bg-green-700 cursor-pointer"
+                disabled={loading}
+              >
+                {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconCircleCheck className="w-4 h-4 mr-2" />}
+                Verify Organization
+              </Button>
+              {orgData.reqForVerification && (
+                <Button
+                  onClick={() => setShowDialogs(prev => ({ ...prev, reject: true }))}
+                  variant="destructive"
+                  className="w-full cursor-pointer"
+                  disabled={loading}
+                >
+                  {loading ? <IconLoader2 className="w-4 h-4 mr-2 animate-spin" /> : <IconCircleX className="w-4 h-4 mr-2" />}
+                  Reject Verification
+                </Button>
+              )}
+            </div>
           ) : (
             <Button
               onClick={() => makeApiCall('/unverify')}
@@ -198,6 +216,18 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
         </ActionCard>
       )}
 
+      {/* Bank Account Management */}
+      {orgData.bankDetails && (
+        <ActionCard
+          title="Bank Account Verification"
+          description="Verify bank account details"
+          icon={IconBuildingBank}
+          color="green"
+        >
+          <BankAccountManagement bankDetails={orgData.bankDetails} loading={loading} makeApiCall={makeApiCall} />
+        </ActionCard>
+      )}
+
       {/* Payment Gateway Management */}
       <ActionCard
         title="Payment Gateway"
@@ -226,8 +256,21 @@ export default function OrganizationActions({ orgId, orgData, onUpdate }) {
         open={showDialogs.verify}
         onClose={() => handleDialogClose('verify')}
         onSubmit={() => handleFormSubmit('/verify', {
+          allowsEventCreation: formData.allowsEventCreation ?? true,
           verificationNotes: formData.verificationNotes
         }, 'verify')}
+        formData={formData}
+        setFormData={setFormData}
+        loading={loading}
+      />
+
+      {/* Reject Organization Dialog */}
+      <RejectOrganizationDialog
+        open={showDialogs.reject}
+        onClose={() => handleDialogClose('reject')}
+        onSubmit={() => handleFormSubmit('/reject', {
+          reason: formData.rejectReason
+        }, 'reject')}
         formData={formData}
         setFormData={setFormData}
         loading={loading}

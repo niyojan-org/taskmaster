@@ -63,7 +63,7 @@ export default function SuperAdminDashboard() {
 
   return (
     <div className="h-full">
-      <div className="max-w-7xl mx-auto p-6 space-y-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">Super Admin Dashboard</h1>

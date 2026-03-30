@@ -77,7 +77,7 @@ export default function BankDetailsCard({ bankDetails, org, onUpdate }) {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5 text-green-600" />
+          <IconFileText className="h-5 w-5 text-green-600" />
           Bank Details
         </CardTitle>
         <CardDescription>Banking information for payments</CardDescription>

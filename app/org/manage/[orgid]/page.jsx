@@ -21,8 +21,8 @@ export default function ManageOrganizationPage() {
     try {
       setLoading(true);
       setError(null);
-      const response = await api.get(`/tm/org/${orgid}`);
-      
+      const response = await api.get(`/organizations/taskmaster/${orgid}`);
+
       if (response.data.success) {
         setOrgData(response.data.data);
       } else {
@@ -131,13 +131,13 @@ export default function ManageOrganizationPage() {
   }
 
   return (
-    <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
+    <div className="space-y-6 bg-gray-50 h-full">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           {orgData.logo && (
-            <img 
-              src={orgData.logo} 
+            <img
+              src={orgData.logo}
               alt={`${orgData.name} logo`}
               className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
             />
@@ -167,9 +167,9 @@ export default function ManageOrganizationPage() {
           <OrganizationDetails orgData={orgData} />
         </div>
         <div className="lg:col-span-1">
-          <OrganizationActions 
-            orgId={orgid} 
-            orgData={orgData} 
+          <OrganizationActions
+            orgId={orgid}
+            orgData={orgData}
             onUpdate={handleDataUpdate}
           />
         </div>

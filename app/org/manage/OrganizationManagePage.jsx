@@ -66,7 +66,7 @@ export default function OrganizationManagePage() {
         }
       });
 
-      const response = await api.get(`/tm/org?${queryParams.toString()}`);
+      const response = await api.get(`/taskmaster/organization?${queryParams.toString()}`);
       
       if (response.data.success) {
         setOrganizations(response.data.docs);
