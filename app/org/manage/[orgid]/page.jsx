@@ -1,179 +1,302 @@
-'use client';
+"use client";
+import { useEffect } from "react";
+import { useParams } from "next/navigation";
+import { toast } from "sonner";
+import useOrganizationStore from "./orgStore";
+import DashboardSkeleton from "./components/DashboardSkeleton";
+import BasicInfoCard from "./components/BasicInfoCard";
+import AddressCard from "./components/AddressCard";
+import StatusCard from "./components/StatusCard";
+import VerificationCard from "./components/VerificationCard";
+import EventPermissionsCard from "./components/EventPermissionsCard";
+import EventPreferencesCard from "./components/EventPreferencesCard";
+import StatsCard from "./components/StatsCard";
+import RatingCard from "./components/RatingCard";
+import DocumentsCard from "./components/DocumentsCard";
+import BankDetailsCard from "./components/BankDetailsCard";
+import RiskFlagsCard from "./components/RiskFlagsCard";
+import OnboardingProgressCard from "./components/OnboardingProgressCard";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import {
+  IconSparkles,
+  IconBuildingSkyscraper,
+  IconShieldCheck,
+} from "@tabler/icons-react";
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import api from '@/lib/api';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { IconRefresh, IconBuilding, IconCircleX } from '@tabler/icons-react';
-import { toast } from 'sonner';
-import OrganizationDetails from './components/OrganizationDetails';
-import OrganizationActions from './components/OrganizationActions';
+const cardIds = {
+  basicInfo: "basicInfo",
+  address: "address",
+  status: "status",
+  permissions: "permissions",
+  preferences: "preferences",
+  bankDetails: "bankDetails",
+  onboarding: "onboarding",
+};
 
-export default function ManageOrganizationPage() {
+function Page() {
   const { orgid } = useParams();
-  const [orgData, setOrgData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchOrganizationData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await api.get(`/organizations/taskmaster/${orgid}`);
-
-      if (response.data.success) {
-        setOrgData(response.data.data);
-      } else {
-        setError(response.data.message || 'Failed to fetch organization data');
-        toast.error(response.data.message || 'Failed to fetch organization data');
-      }
-    } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error fetching organization data';
-      setError(errorMessage);
-      toast.error(errorMessage);
-      console.error('Error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    organizationId,
+    organizationData,
+    loading,
+    saving,
+    editingStates,
+    activeEditCard,
+    setOrganizationId,
+    updateOrganizationField,
+    toggleEdit,
+    cancelEdit,
+    saveOrganizationData,
+    verifyOrganization,
+    rejectVerificationRequest,
+    unverifyOrganization,
+  } = useOrganizationStore();
 
   useEffect(() => {
-    if (orgid) {
-      fetchOrganizationData();
+    if (orgid && orgid !== organizationId) {
+      setOrganizationId(orgid);
     }
-  }, [orgid]);
+  }, [orgid, organizationId, setOrganizationId]);
 
-  const handleDataUpdate = () => {
-    fetchOrganizationData();
+  const handleEdit = (cardId) => {
+    if (activeEditCard && activeEditCard !== cardId) {
+      toast.error("Finish or cancel the current edit before switching cards.");
+      return;
+    }
+    toggleEdit(cardId);
   };
 
-  if (loading) {
-    return (
-      <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Organization Management</h1>
-            <p className="text-gray-600">Loading organization details...</p>
-          </div>
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
-            <Card className="animate-pulse">
-              <CardHeader>
-                <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="h-4 bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="lg:col-span-1">
-            <Card className="animate-pulse">
-              <CardHeader>
-                <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="h-10 bg-gray-200 rounded"></div>
-                  <div className="h-10 bg-gray-200 rounded"></div>
-                  <div className="h-10 bg-gray-200 rounded"></div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleSave = async (cardId) => {
+    try {
+      await saveOrganizationData(cardId);
+      toast.success("Organization profile updated.");
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          "Unable to save organization profile.",
+      );
+    }
+  };
 
-  if (error) {
-    return (
-      <div className="p-6 bg-gray-50 min-h-screen">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center py-12">
-            <IconCircleX className="mx-auto h-12 w-12 text-red-500 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Organization</h3>
-            <p className="text-gray-500 mb-4">{error}</p>
-            <Button onClick={fetchOrganizationData} className="bg-blue-600 hover:bg-blue-700">
-              <IconRefresh className="w-4 h-4 mr-2" />
-              Try Again
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleVerifyOrganization = async ({ allowsEventCreation, note }) => {
+    try {
+      await verifyOrganization({ allowsEventCreation, note });
+      toast.success("Organization verified successfully.");
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message || "Unable to verify organization.",
+      );
+      throw error;
+    }
+  };
 
-  if (!orgData) {
+  const handleRejectVerification = async ({ reason }) => {
+    try {
+      await rejectVerificationRequest({ reason });
+      toast.success("Verification request rejected.");
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          "Unable to reject verification request.",
+      );
+      throw error;
+    }
+  };
+
+  const handleUnverifyOrganization = async ({ reason }) => {
+    try {
+      await unverifyOrganization({ reason });
+      toast.success("Organization unverified.");
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message || "Unable to unverify organization.",
+      );
+      throw error;
+    }
+  };
+
+  if (loading || !organizationData) {
     return (
-      <div className="p-6 bg-gray-50 min-h-screen">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center py-12">
-            <IconBuilding className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Organization Not Found</h3>
-            <p className="text-gray-500 mb-4">No organization data found for this ID</p>
-            <Button onClick={fetchOrganizationData} variant="outline">
-              <IconRefresh className="w-4 h-4 mr-2" />
-              Refresh
-            </Button>
-          </div>
-        </div>
+      <div className="min-h-screen bg-background px-4 py-6 text-foreground md:px-6 lg:px-8">
+        <DashboardSkeleton />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 bg-gray-50 h-full">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          {orgData.logo && (
-            <img
-              src={orgData.logo}
-              alt={`${orgData.name} logo`}
-              className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
-            />
-          )}
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">{orgData.name}</h1>
-            <div className="flex items-center space-x-2 mt-1">
-              <p className="text-gray-600">@{orgData.slug}</p>
-              <Badge variant={orgData.verified ? "default" : "secondary"} className="cursor-default">
-                {orgData.verified ? "Verified" : "Unverified"}
+    <div className="min-h-screen bg-background px-4 py-6 text-foreground md:px-6 lg:px-8">
+      <Card className="mb-6 overflow-hidden">
+        <CardHeader className="pb-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <div className="rounded-xl border border-border bg-muted p-2">
+                <IconBuildingSkyscraper className="size-5 text-muted-foreground" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  Organization Admin
+                </p>
+                <h1 className="text-2xl font-semibold text-foreground">
+                  {organizationData.name || "Organization"}
+                </h1>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Badge variant="outline">
+                <IconSparkles className="size-3.5" />
+                Profile Workspace
               </Badge>
-              <Badge variant={orgData.active ? "default" : "destructive"} className="cursor-default">
-                {orgData.active ? "Active" : "Inactive"}
+              <Badge variant="outline">
+                <IconShieldCheck className="size-3.5" />
+                Secure Admin View
               </Badge>
             </div>
           </div>
-        </div>
-        <Button onClick={fetchOrganizationData} variant="outline" className="flex items-center gap-2 cursor-pointer">
-          <IconRefresh className="w-4 h-4" />
-          Refresh
-        </Button>
-      </div>
+        </CardHeader>
 
-      {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <OrganizationDetails orgData={orgData} />
+        <CardContent className="pt-0">
+          <p className="text-sm text-muted-foreground">
+            Manage profile, compliance, permissions, and onboarding in a single
+            structured workspace.
+          </p>
+          <Separator className="my-4" />
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant={organizationData.active ? "default" : "outline"}>
+              {organizationData.active ? "Active" : "Inactive"}
+            </Badge>
+            <Badge variant={organizationData.verified ? "default" : "outline"}>
+              {organizationData.verified ? "Verified" : "Unverified"}
+            </Badge>
+            <Badge variant="outline">ID: {organizationData._id}</Badge>
+            <Badge variant="outline">
+              Trust Score: {organizationData.trustScore ?? 0}
+            </Badge>
+            <Badge variant="outline">
+              Risk: {organizationData.riskLevel || "unknown"}
+            </Badge>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:auto-rows-fr xl:grid-cols-12">
+        <div className="h-full md:col-span-2 xl:col-span-8">
+          <BasicInfoCard
+            data={organizationData}
+            isEditing={!!editingStates[cardIds.basicInfo]}
+            isSaving={saving}
+            onEdit={() => handleEdit(cardIds.basicInfo)}
+            onCancel={() => cancelEdit(cardIds.basicInfo)}
+            onSave={() => handleSave(cardIds.basicInfo)}
+            onFieldChange={updateOrganizationField}
+          />
         </div>
-        <div className="lg:col-span-1">
-          <OrganizationActions
-            orgId={orgid}
-            orgData={orgData}
-            onUpdate={handleDataUpdate}
+
+        <div className="h-full xl:col-span-4">
+          <StatusCard
+            data={organizationData}
+            isEditing={!!editingStates[cardIds.status]}
+            isSaving={saving}
+            onEdit={() => handleEdit(cardIds.status)}
+            onCancel={() => cancelEdit(cardIds.status)}
+            onSave={() => handleSave(cardIds.status)}
+            onFieldChange={updateOrganizationField}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-4">
+          <VerificationCard
+            data={organizationData}
+            isSaving={saving}
+            onVerifyOrganization={handleVerifyOrganization}
+            onRejectVerification={handleRejectVerification}
+            onUnverifyOrganization={handleUnverifyOrganization}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-4">
+          <StatsCard
+            data={organizationData}
+            isSaving={saving}
+            onSave={() => handleSave("stats")}
+          />
+        </div>
+        <div className="h-full md:col-span-2 xl:col-span-4">
+          <RatingCard
+            data={organizationData}
+            isSaving={saving}
+            onSave={() => handleSave("rating")}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-6 xl:row-span-1">
+          <DocumentsCard
+            data={organizationData}
+            isSaving={saving}
+            onSave={() => handleSave("documents")}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-6">
+          <AddressCard
+            data={organizationData}
+            isEditing={!!editingStates[cardIds.address]}
+            isSaving={saving}
+            onEdit={() => handleEdit(cardIds.address)}
+            onCancel={() => cancelEdit(cardIds.address)}
+            onSave={() => handleSave(cardIds.address)}
+            onFieldChange={updateOrganizationField}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-8">
+          <BankDetailsCard
+            data={organizationData}
+            isEditing={!!editingStates[cardIds.bankDetails]}
+            isSaving={saving}
+            onEdit={() => handleEdit(cardIds.bankDetails)}
+            onCancel={() => cancelEdit(cardIds.bankDetails)}
+            onSave={() => handleSave(cardIds.bankDetails)}
+            onFieldChange={updateOrganizationField}
+          />
+        </div>
+
+        <div className="h-full xl:col-span-4">
+          <EventPermissionsCard
+            data={organizationData}
+            isEditing={!!editingStates[cardIds.permissions]}
+            isSaving={saving}
+            onEdit={() => handleEdit(cardIds.permissions)}
+            onCancel={() => cancelEdit(cardIds.permissions)}
+            onSave={() => handleSave(cardIds.permissions)}
+            onFieldChange={updateOrganizationField}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-6">
+          <EventPreferencesCard
+            data={organizationData}
+            isEditing={!!editingStates[cardIds.preferences]}
+            isSaving={saving}
+            onEdit={() => handleEdit(cardIds.preferences)}
+            onCancel={() => cancelEdit(cardIds.preferences)}
+            onSave={() => handleSave(cardIds.preferences)}
+            onFieldChange={updateOrganizationField}
+          />
+        </div>
+
+        <div className="h-full md:col-span-2 xl:col-span-6">
+          <RiskFlagsCard
+            data={organizationData}
+            isSaving={saving}
+            onSave={() => handleSave("risk")}
           />
         </div>
       </div>
     </div>
   );
 }
+
+export default Page;

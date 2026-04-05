@@ -11,9 +11,9 @@ function ClientLayout({ children }) {
     useEffect(() => {
         checkAuth();
     }, [checkAuth]);
-    if (authLoading) {
-        return <FullPageLoader />;
-    }
+    // if (authLoading) {
+    //     return <FullPageLoader />;
+    // }
     if (!isAuthenticated) {
         return <LockPage />
     }

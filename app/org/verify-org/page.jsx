@@ -34,6 +34,7 @@ export default function VerificationRequestsPage() {
     try {
       const response = await api.get("/organizations/taskmaster/verifications/pending/organizations");
       if (response.data.success) {
+        console.log(response.data);
         setOrganizations(response.data.data);
       } else {
         setError("Failed to fetch pending verifications");
@@ -161,7 +162,7 @@ export default function VerificationRequestsPage() {
                   {/* Admin Info */}
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <IconUser className="w-4 h-4" />
-                    <span>{org.admin.name}</span>
+                    <span>{org.owner?.name}</span>
                   </div>
 
                   {/* Contact Info */}

@@ -13,7 +13,7 @@ import MostActiveCities from "./components/MostActiveCities";
 import api from "@/lib/api";
 import Link from "next/link";
 import { toast } from "sonner";
-import { IconRefreshDot, IconBuilding, IconCircleCheck, IconClock, IconTrendingUp, IconCalendar, IconCurrencyRupee, IconStar } from "@tabler/icons-react";
+import { IconRefreshDot, IconBuilding, IconCircleCheck, IconClock, IconTrendingUp, IconCalendar, IconCurrencyRupee, IconStar, IconX, IconRefresh } from "@tabler/icons-react";
 import FullPageLoader from "@/components/pages/loader";
 
 
@@ -53,11 +53,11 @@ export default function OrganizationDashboard() {
     return (
       <div className="p-6">
         <div className="text-center py-12">
-          <XCircle className="mx-auto h-12 w-12 text-red-500 mb-4" />
+          <IconX className="mx-auto h-12 w-12 text-red-500 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Dashboard</h3>
           <p className="text-gray-500 mb-4">{error}</p>
           <Button onClick={fetchSummary} className="bg-blue-600 hover:bg-blue-700">
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <IconRefresh className="w-4 h-4 mr-2" />
             Try Again
           </Button>
         </div>
