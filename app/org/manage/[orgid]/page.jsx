@@ -117,6 +117,27 @@ function Page() {
     }
   };
 
+  const handleToggleEventCreation = async ({ allowsEventCreation }) => {
+    const previousValue = organizationData.allowsEventCreation ?? true;
+
+    try {
+      updateOrganizationField("allowsEventCreation", allowsEventCreation);
+      await saveOrganizationData("verification");
+      toast.success(
+        allowsEventCreation
+          ? "Event creation has been enabled."
+          : "Event creation has been disabled.",
+      );
+    } catch (error) {
+      updateOrganizationField("allowsEventCreation", previousValue);
+      toast.error(
+        error?.response?.data?.message ||
+          "Unable to update event creation access.",
+      );
+      throw error;
+    }
+  };
+
   if (loading || !organizationData) {
     return (
       <div className="min-h-screen bg-background px-4 py-6 text-foreground md:px-6 lg:px-8">
@@ -213,6 +234,7 @@ function Page() {
             onVerifyOrganization={handleVerifyOrganization}
             onRejectVerification={handleRejectVerification}
             onUnverifyOrganization={handleUnverifyOrganization}
+            onToggleEventCreation={handleToggleEventCreation}
           />
         </div>
 

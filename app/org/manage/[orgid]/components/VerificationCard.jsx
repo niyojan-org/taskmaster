@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -23,18 +23,25 @@ function VerificationCard({
   onVerifyOrganization,
   onRejectVerification,
   onUnverifyOrganization,
+  onToggleEventCreation,
 }) {
   const [verifyOpen, setVerifyOpen] = useState(false);
   const [rejectOpen, setRejectOpen] = useState(false);
   const [unverifyOpen, setUnverifyOpen] = useState(false);
+  const [toggleEventOpen, setToggleEventOpen] = useState(false);
   const [allowsEventCreation, setAllowsEventCreation] = useState(
     data.allowsEventCreation ?? true,
   );
+  const [nextAllowsEventCreation, setNextAllowsEventCreation] = useState(null);
   const [verifyNote, setVerifyNote] = useState("");
   const [rejectReason, setRejectReason] = useState("");
   const [unverifyReason, setUnverifyReason] = useState("");
 
   const pendingVerification = !!data.reqForVerification && !data.verified;
+
+  useEffect(() => {
+    setAllowsEventCreation(data.allowsEventCreation ?? true);
+  }, [data.allowsEventCreation]);
 
   const handleVerify = async () => {
     await onVerifyOrganization?.({ allowsEventCreation, note: verifyNote });
@@ -52,6 +59,21 @@ function VerificationCard({
     await onUnverifyOrganization?.({ reason: unverifyReason });
     setUnverifyOpen(false);
     setUnverifyReason("");
+  };
+
+  const handleRequestToggleEventCreation = () => {
+    const nextValue = !(data.allowsEventCreation ?? true);
+    setNextAllowsEventCreation(nextValue);
+    setToggleEventOpen(true);
+  };
+
+  const handleConfirmToggleEventCreation = async () => {
+    if (typeof nextAllowsEventCreation !== "boolean") return;
+    await onToggleEventCreation?.({
+      allowsEventCreation: nextAllowsEventCreation,
+    });
+    setToggleEventOpen(false);
+    setNextAllowsEventCreation(null);
   };
 
   return (
@@ -76,6 +98,11 @@ function VerificationCard({
               {data.reqForVerification
                 ? "Verification Requested"
                 : "No Verification Request"}
+            </Badge>
+            <Badge variant={allowsEventCreation ? "default" : "outline"}>
+              {allowsEventCreation
+                ? "Event Creation Allowed"
+                : "Event Creation Blocked"}
             </Badge>
           </div>
 
@@ -110,6 +137,17 @@ function VerificationCard({
                 Unverify Organization
               </Button>
             ) : null}
+
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleRequestToggleEventCreation}
+              disabled={isSaving}
+            >
+              {(data.allowsEventCreation ?? true)
+                ? "Disable Event Creation"
+                : "Enable Event Creation"}
+            </Button>
           </div>
         </div>
       </CardFrame>
@@ -232,6 +270,49 @@ function VerificationCard({
               disabled={isSaving || !unverifyReason.trim()}
             >
               {isSaving ? "Submitting..." : "Unverify"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={toggleEventOpen}
+        onOpenChange={(open) => {
+          setToggleEventOpen(open);
+          if (!open) setNextAllowsEventCreation(null);
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {nextAllowsEventCreation
+                ? "Allow Event Creation"
+                : "Block Event Creation"}
+            </DialogTitle>
+            <DialogDescription>
+              {nextAllowsEventCreation
+                ? "This will allow this organization to create events."
+                : "This will prevent this organization from creating events."}
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setToggleEventOpen(false)}
+              disabled={isSaving}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleConfirmToggleEventCreation}
+              disabled={isSaving}
+            >
+              {isSaving
+                ? "Updating..."
+                : nextAllowsEventCreation
+                  ? "Allow"
+                  : "Block"}
             </Button>
           </DialogFooter>
         </DialogContent>

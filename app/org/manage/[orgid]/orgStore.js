@@ -5,6 +5,48 @@ const Route = (id) => `/organizations/taskmaster/${id}`;
 
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
+const isPlainObject = (value) =>
+  Object.prototype.toString.call(value) === "[object Object]";
+
+const getChangedPayload = (initialValue, currentValue) => {
+  if (initialValue === currentValue) {
+    return undefined;
+  }
+
+  if (Array.isArray(initialValue) || Array.isArray(currentValue)) {
+    return JSON.stringify(initialValue) === JSON.stringify(currentValue)
+      ? undefined
+      : deepClone(currentValue);
+  }
+
+  if (isPlainObject(initialValue) && isPlainObject(currentValue)) {
+    const changed = {};
+    const keys = new Set([
+      ...Object.keys(initialValue || {}),
+      ...Object.keys(currentValue || {}),
+    ]);
+
+    keys.forEach((key) => {
+      if (key === "_id") {
+        return;
+      }
+
+      const nextValue = getChangedPayload(
+        initialValue?.[key],
+        currentValue?.[key],
+      );
+
+      if (nextValue !== undefined) {
+        changed[key] = nextValue;
+      }
+    });
+
+    return Object.keys(changed).length > 0 ? changed : undefined;
+  }
+
+  return initialValue !== currentValue ? currentValue : undefined;
+};
+
 const setByPath = (obj, path, value) => {
   const keys = path.split(".");
   const nextObj = deepClone(obj || {});
@@ -109,17 +151,33 @@ const useOrganizationStore = create((set) => ({
     try {
       set({ saving: true });
       const state = useOrganizationStore.getState();
-      const payload = deepClone(state.organizationData);
-      const response = await api.put("/organization/update", payload);
+      const payload =
+        getChangedPayload(
+          state.initialOrganizationData,
+          state.organizationData,
+        ) || {};
 
-      if (response.data?.success) {
-        const normalized = deepClone(response.data?.data || payload);
+      if (Object.keys(payload).length === 0) {
         set((prev) => ({
-          organizationData: normalized,
-          initialOrganizationData: normalized,
           editingStates: { ...prev.editingStates, [cardId]: false },
           activeEditCard: null,
         }));
+
+        return {
+          data: {
+            success: true,
+            data: deepClone(state.organizationData),
+            skipped: true,
+          },
+        };
+      }
+
+      const response = await api.patch(Route(state.organizationId), payload);
+
+      if (response.data?.success) {
+        await useOrganizationStore
+          .getState()
+          .setOrganizationId(state.organizationId);
       }
 
       return response;
