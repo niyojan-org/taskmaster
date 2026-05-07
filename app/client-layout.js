@@ -28,6 +28,7 @@ function ClientLayout({ children }) {
   }
   return (
     <div>
+      
       <NavigationBar />
       <div className="px-2 pt-18 h-dvh">{children}</div>
     </div>

@@ -3,13 +3,43 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { IconFilter, IconSearch } from "@tabler/icons-react";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { IconChevronDown, IconFilter, IconSearch } from "@tabler/icons-react";
+
+function FilterDropdown({ value, placeholder, options, onChange }) {
+  const selectedLabel =
+    options.find((option) => option.value === value)?.label || placeholder;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        className={cn(
+          buttonVariants({ variant: "outline" }),
+          "w-full justify-between font-normal",
+        )}
+      >
+        <span className="truncate">{selectedLabel}</span>
+        <IconChevronDown className="h-4 w-4 text-muted-foreground" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-full min-w-48" align="start">
+        <DropdownMenuRadioGroup value={value} onValueChange={onChange}>
+          {options.map((option) => (
+            <DropdownMenuRadioItem key={option.value} value={option.value} className="capitalize w-full">
+              {option.label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 export default function OrganizationFilters({
   filters,
@@ -19,6 +49,49 @@ export default function OrganizationFilters({
   onApply,
   onReset,
 }) {
+  const categoryOptions = [
+    { value: "all", label: "All categories" },
+    ...categories.map((category) => ({ value: category, label: category })),
+  ];
+
+  const verificationOptions = [
+    { value: "all", label: "All" },
+    { value: "true", label: "Verified" },
+    { value: "false", label: "Unverified" },
+  ];
+
+  const blockStatusOptions = [
+    { value: "all", label: "All" },
+    { value: "false", label: "Active" },
+    { value: "true", label: "Blocked" },
+  ];
+
+  const riskOptions = [
+    { value: "all", label: "All" },
+    { value: "low", label: "Low" },
+    { value: "medium", label: "Medium" },
+    { value: "high", label: "High" },
+  ];
+
+  const sortByOptions = [
+    { value: "createdAt", label: "Created Date" },
+    { value: "updatedAt", label: "Updated Date" },
+    { value: "name", label: "Name" },
+    { value: "trustScore", label: "Trust Score" },
+  ];
+
+  const sortOrderOptions = [
+    { value: "desc", label: "Descending" },
+    { value: "asc", label: "Ascending" },
+  ];
+
+  const pageSizeOptions = [
+    { value: "10", label: "10" },
+    { value: "20", label: "20" },
+    { value: "30", label: "30" },
+    { value: "50", label: "50" },
+  ];
+
   return (
     <Card>
       <CardHeader className="pb-3">
@@ -49,136 +122,82 @@ export default function OrganizationFilters({
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 w-full">
             <Label>Category</Label>
-            <Select
+            <FilterDropdown
               value={filters.category || "all"}
-              onValueChange={(value) =>
+              placeholder="All categories"
+              options={categoryOptions}
+              onChange={(value) =>
                 onFilterChange("category", value === "all" ? "" : value)
               }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="All categories" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All categories</SelectItem>
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 w-full">
             <Label>Verification</Label>
-            <Select
+            <FilterDropdown
               value={filters.verified || "all"}
-              onValueChange={(value) =>
+              placeholder="All"
+              options={verificationOptions}
+              onChange={(value) =>
                 onFilterChange("verified", value === "all" ? "" : value)
               }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="All" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="true">Verified</SelectItem>
-                <SelectItem value="false">Unverified</SelectItem>
-              </SelectContent>
-            </Select>
+            />
           </div>
 
           <div className="space-y-2">
             <Label>Block Status</Label>
-            <Select
+            <FilterDropdown
               value={filters.isBlocked || "all"}
-              onValueChange={(value) =>
+              placeholder="All"
+              options={blockStatusOptions}
+              onChange={(value) =>
                 onFilterChange("isBlocked", value === "all" ? "" : value)
               }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="All" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="false">Active</SelectItem>
-                <SelectItem value="true">Blocked</SelectItem>
-              </SelectContent>
-            </Select>
+            />
           </div>
 
           <div className="space-y-2">
             <Label>Risk</Label>
-            <Select
+            <FilterDropdown
               value={filters.riskLevel || "all"}
-              onValueChange={(value) =>
+              placeholder="All"
+              options={riskOptions}
+              onChange={(value) =>
                 onFilterChange("riskLevel", value === "all" ? "" : value)
               }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="All" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="low">Low</SelectItem>
-                <SelectItem value="medium">Medium</SelectItem>
-                <SelectItem value="high">High</SelectItem>
-              </SelectContent>
-            </Select>
+            />
           </div>
 
           <div className="space-y-2">
             <Label>Sort By</Label>
-            <Select
+            <FilterDropdown
               value={filters.sortBy}
-              onValueChange={(value) => onFilterChange("sortBy", value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="createdAt">Created Date</SelectItem>
-                <SelectItem value="updatedAt">Updated Date</SelectItem>
-                <SelectItem value="name">Name</SelectItem>
-                <SelectItem value="trustScore">Trust Score</SelectItem>
-              </SelectContent>
-            </Select>
+              placeholder="Sort By"
+              options={sortByOptions}
+              onChange={(value) => onFilterChange("sortBy", value)}
+            />
           </div>
 
           <div className="space-y-2">
             <Label>Order</Label>
-            <Select
+            <FilterDropdown
               value={filters.sortOrder}
-              onValueChange={(value) => onFilterChange("sortOrder", value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="desc">Descending</SelectItem>
-                <SelectItem value="asc">Ascending</SelectItem>
-              </SelectContent>
-            </Select>
+              placeholder="Order"
+              options={sortOrderOptions}
+              onChange={(value) => onFilterChange("sortOrder", value)}
+            />
           </div>
 
           <div className="space-y-2">
             <Label>Page Size</Label>
-            <Select
+            <FilterDropdown
               value={String(filters.limit)}
-              onValueChange={(value) => onFilterChange("limit", Number(value))}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-                <SelectItem value="30">30</SelectItem>
-                <SelectItem value="50">50</SelectItem>
-              </SelectContent>
-            </Select>
+              placeholder="Page Size"
+              options={pageSizeOptions}
+              onChange={(value) => onFilterChange("limit", Number(value))}
+            />
           </div>
         </div>
 

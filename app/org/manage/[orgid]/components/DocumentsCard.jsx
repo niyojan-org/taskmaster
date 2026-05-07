@@ -28,8 +28,13 @@ function DocumentRow({ doc }) {
       </div>
 
       <div className="mt-3">
-        <Button variant="outline" size="sm" asChild>
-          <a href={doc.url} target="_blank" rel="noreferrer">
+        <Button variant="outline" size="sm">
+          <a
+            href={doc.url}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1"
+          >
             <IconExternalLink />
             Open
           </a>
